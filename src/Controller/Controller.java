@@ -22,6 +22,7 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import org.graphstream.algorithm.BetweennessCentrality;
 import org.graphstream.algorithm.Toolkit;
+import org.graphstream.graph.Node;
 import org.graphstream.ui.swingViewer.DefaultView;
 import org.graphstream.ui.swingViewer.View;
 import org.graphstream.ui.swingViewer.Viewer;
@@ -296,17 +297,27 @@ public class Controller implements ActionListener{
         }
         else if (e.equals(m.getBtnDisplayGraph())){
             // button graph display in main performed
+            String styleSheet="node {"+
+                " fill-color: grey;"+
+                " size: 10px;"+
+                " stroke-mode: plain;"+
+                " stroke-color: black;"+
+                " stroke-width: 1px;"+
+                "}"+
+                "node.Person {"+
+                " fill-color: blue;"+
+                " size: 15px;"+
+                "}";
+            
+            m.getG().addAttribute("ui.stylesheet", styleSheet);
+//            m.getG().getNode("0").addAttribute("ui.class", "Person");
+//            m.getG().getNode("0").addAttribute("ui.label", "Dwi");
             m.getG().display();
-//            int nEdge = m.getG().getEdgeCount(); // sm dgn 0;
 //            while(m.getG().getNodeIterator().hasNext()){
 //                if (m.getG().getEdgeCount() == 0){
 //                    System.out.println(m.getG().getNodeIterator().next());
 //                }
 //            }
-//            Viewer viewer = m.getG().display();
-//            View v = viewer.getDefaultView();
-//            v.resizeFrame(800, 600);
-//            v.set
         }
     }
 }
