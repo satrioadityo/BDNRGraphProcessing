@@ -1,0 +1,387 @@
+g.addNode("50");
+g.getNode("50").addAttribute("tweet", "Pemerintah kayanya mulai aneh sekarang");
+
+g.addEdge("2450", "0", "50").addAttribute("tanggal", "Sun Jul 12 16:47:33 ICT 2014");
+g.getEdge("2450").addAttribute("ui.label", "tweet");
+
+g.addNode("51");
+g.getNode("51").addAttribute("tweet", "#SaveHajiLulung");
+
+g.addEdge("2451", "1", "51").addAttribute("tanggal", "Sun Jul 12 00:47:33 ICT 2013");
+g.getEdge("2451").addAttribute("ui.label", "tweet");
+
+g.addNode("52");
+g.getNode("52").addAttribute("tweet", "#np Hatsune Miku - Happy End Gretel");
+
+g.addEdge("2452", "2", "52").addAttribute("tanggal", "Mon Jun 13 19:48:33 ICT 2010");
+g.getEdge("2452").addAttribute("ui.label", "tweet");
+
+g.addNode("53");
+g.getNode("53").addAttribute("tweet", "Besok jadi kan kumpul di kampus ? cc : @Kusuma @Kurnia");
+g.getNode("53").addAttribute("mention", "Kusuma");
+g.getNode("53").addAttribute("mention", "Kurnia");
+
+g.addEdge("2453", "53", "45").addAttribute("tanggal", "Sun Jul 12 16:47:33 ICT 2014");
+g.getEdge("2453").addAttribute("ui.label", "tweet");
+g.addEdge("2454", "53", "59").addAttribute("tanggal", "Sun Jul 12 16:47:33 ICT 2014");
+g.getEdge("2454").addAttribute("ui.label", "tweet");
+g.addEdge("2455", "3", "53").addAttribute("tanggal", "Sun Jul 12 16:47:33 ICT 2014");
+g.getEdge("2455").addAttribute("ui.label", "tweet");
+
+g.addNode("54");
+g.getNode("54").addAttribute("tweet", "Freedom!");
+
+g.addEdge("2456", "4", "54").addAttribute("tanggal", "Fri Jan 11 06:47:33 ICT 2013");
+g.getEdge("2456").addAttribute("ui.label", "tweet");
+
+g.addNode("55");
+g.getNode("55").addAttribute("tweet", "jar ke kosan dong, penting @Fajar");
+g.getNode("55").addAttribute("mention", "Fajar");
+
+g.addEdge("2457", "40", "55").addAttribute("tanggal", "Sat Feb 01 07:50:33 ICT 2013");
+g.addEdge("2458", "5", "55").addAttribute("tanggal", "Sat Feb 01 07:50:33 ICT 2013");
+
+g.addNode("56");
+g.getNode("56").addAttribute("tweet", "BuckinsRobin againz w/ @Arif @Rizki @Ni");
+g.getNode("56").addAttribute("mention", "Arif");
+g.getNode("56").addAttribute("mention", "Rizki");
+g.getNode("56").addAttribute("mention", "Ni");
+
+g.addEdge("2459", "6", "56").addAttribute("tanggal", "Tue Feb 02 08:50:33 ICT 2013");
+g.addEdge("2460", "29", "56").addAttribute("tanggal", "Tue Feb 02 08:50:33 ICT 2013");
+g.addEdge("2461", "34", "56").addAttribute("tanggal", "Tue Feb 02 08:50:33 ICT 2013");
+g.addEdge("2462", "28", "56").addAttribute("tanggal", "Tue Feb 02 08:50:33 ICT 2013");
+
+g.addNode("57");
+g.getNode("57").addAttribute("tweet", "Kalo @Kartika bilang sih - 'Meh-in aja' =)) ");
+g.getNode("57").addAttribute("mention", "Kartika");
+
+g.addEdge("2463", "7", "57").addAttribute("tanggal", "Mon Feb 06 09:50:33 ICT 2013");
+g.addEdge("2464", "38", "57").addAttribute("tanggal", "Mon Feb 06 09:50:33 ICT 2013");
+
+g.addNode("58");
+g.getNode("58").addAttribute("tweet", "#YOLO");
+
+g.addEdge("2465", "8", "58").addAttribute("tanggal", "Mon Feb 06 09:50:33 ICT 2013");
+
+g.addNode("59");
+g.getNode("59").addAttribute("tweet", "Take over the world - 54%");
+
+g.addEdge("2466", "9", "59").addAttribute("tanggal", "Mon Feb 06 09:50:33 ICT 2013");
+
+g.addNode("60");
+g.getNode("60").addAttribute("tweet", "So did I...");
+
+g.addEdge("2467", "10", "60").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("61");
+g.getNode("61").addAttribute("tweet", "This is gonna be my first tweet :)");
+
+g.addEdge("2468", "11", "61").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("62");
+g.getNode("62").addAttribute("tweet", "tinyurl.com/asdasd @Putri @Sari @Eka");
+g.getNode("62").addAttribute("mention", "Putri");
+g.getNode("62").addAttribute("mention", "Sari");
+g.getNode("62").addAttribute("mention", "Eka");
+
+g.addEdge("2469", "12", "62").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2470", "7", "62").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2471", "9", "62").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2472", "8", "62").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("63");
+g.getNode("63").addAttribute("tweet", "Dasar cowo gitu semua!!");
+
+g.addEdge("2473", "13", "63").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("64");
+g.getNode("64").addAttribute("tweet", "Kapan kawin :(");
+
+g.addEdge("2474", "14", "64").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("65");
+g.getNode("65").addAttribute("tweet", "Move Move cc : @Andi");
+g.getNode("65").addAttribute("mention", "Andi");
+
+g.addEdge("2475", "15", "65").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2476", "18", "65").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("66");
+g.getNode("66").addAttribute("tweet", "Di kerumah lah @Andi");
+g.getNode("66").addAttribute("mention", "Andi");
+
+g.addEdge("2477", "19", "66").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2478", "18", "66").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("67");
+g.getNode("67").addAttribute("tweet", "Jalan2 w/ @Andi");
+g.getNode("67").addAttribute("mention", "Andi");
+
+g.addEdge("2479", "20", "67").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2480", "18", "67").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("68");
+g.getNode("68").addAttribute("tweet", "EarthBOUNDDDDDD");
+
+g.addEdge("2481", "21", "68").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("69");
+g.getNode("69").addAttribute("tweet", "Let me tell you this: if you meet a loner, no matter what they tell you, it's not because they enjoy solitude. It's because they have tried to blend into the world before, and people continue to disappoint them.");
+
+g.addEdge("2482", "22", "69").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("70");
+g.getNode("70").addAttribute("tweet", "Love is like a double-edged sword");
+
+g.addEdge("2483", "23", "70").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("71");
+g.getNode("71").addAttribute("tweet", "Ronerrry Shitooo");
+
+g.addEdge("2484", "24", "71").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("72");
+g.getNode("72").addAttribute("tweet", "#NP Hatsune Miku - Love is War");
+
+g.addEdge("2485", "25", "72").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("73");
+g.getNode("73").addAttribute("tweet", "Home Alone");
+
+g.addEdge("2486", "26", "73").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("74");
+g.getNode("74").addAttribute("tweet", "Besok bareng yaaaa @Eka");
+g.getNode("74").addAttribute("mention", "Eka");
+
+g.addEdge("2487", "27", "74").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2488", "8", "74").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("75");
+g.getNode("75").addAttribute("tweet", "Oke @Pratiwi");
+g.getNode("75").addAttribute("mention", "Pratiwi");
+
+g.addEdge("2489", "28", "75").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2490", "37", "75").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("76");
+g.getNode("76").addAttribute("tweet", "AKhirnya nyampe rumah");
+
+g.addEdge("2491", "29", "76").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("77");
+g.getNode("77").addAttribute("tweet", "Ronerrry Shitooo");
+
+g.addEdge("2492", "30", "77").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("78");
+g.getNode("78").addAttribute("tweet", "Aku udah dirumah yaaaa @Ayu");
+g.getNode("78").addAttribute("mention", "Ayu");
+
+g.addEdge("2493", "31", "78").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2494", "10", "78").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("79");
+g.getNode("79").addAttribute("tweet", "Yakimochi wo Yaite");
+
+g.addEdge("2495", "32", "79").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("80");
+g.getNode("80").addAttribute("tweet", "Mageline <3");
+
+g.addEdge("2496", "33", "80").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("81");
+g.getNode("81").addAttribute("tweet", "Sayonaraaaaaa");
+
+g.addEdge("2497", "34", "81").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("82");
+g.getNode("82").addAttribute("tweet", "#np Supercell Sayonara Memories");
+
+g.addEdge("2498", "35", "82").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("83");
+g.getNode("83").addAttribute("tweet", "Ada lagu baru enakeun lohhhh.. dicek nih Hatsune Miku - World is mine cc @Wulandari");
+g.getNode("83").addAttribute("mention", "Wulandari");
+
+g.addEdge("2499", "36", "83").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2500", "39", "83").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("84");
+g.getNode("84").addAttribute("tweet", "Ntar maleman aja kesininya, jgn sore aku gk dikosan @Ni");
+g.getNode("84").addAttribute("mention", "Ni");
+
+g.addEdge("2501", "37", "84").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2502", "28", "84").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("85");
+g.getNode("83").addAttribute("tweet", "Mikuuuu <3");
+
+g.addEdge("2503", "38", "85").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("86");
+g.getNode("86").addAttribute("tweet", "Besok kerkom ngerjain ai yaaa @Wulandari @Ni @Ayu");
+g.getNode("86").addAttribute("mention", "Wulandari");
+g.getNode("86").addAttribute("mention", "Ni");
+g.getNode("86").addAttribute("mention", "Ayu");
+
+g.addEdge("2504", "39", "86").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2505", "28", "86").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2506", "39", "86").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2507", "10", "86").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("87");
+g.getNode("87").addAttribute("tweet", "This.World!");
+
+g.addEdge("2508", "40", "87").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("88");
+g.getNode("88").addAttribute("tweet", "Boku ga Black Raison Detre");
+
+g.addEdge("2509", "41", "88").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("89");
+g.getNode("89").addAttribute("tweet", "Reality Be Rent, Synapse Break, Banishment Thisu Worldooooo");
+
+g.addEdge("2510", "42", "89").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("90");
+g.getNode("90").addAttribute("tweet", "Cek PM yaaa @Retno");
+g.getNode("90").addAttribute("mention", "Retno");
+
+g.addEdge("2511", "43", "90").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2512", "48", "90").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("91");
+g.getNode("91").addAttribute("tweet", "Meni gak ngabarin :( @Dwi");
+g.getNode("91").addAttribute("mention", "Dwi");
+
+g.addEdge("2513", "44", "91").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2514", "0", "91").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("92");
+g.getNode("92").addAttribute("tweet", "I can't do anything, can I ?");
+
+g.addEdge("2515", "45", "92").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("93");
+g.getNode("93").addAttribute("tweet", "My world is falling down");
+
+g.addEdge("2516", "46", "93").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("94");
+g.getNode("94").addAttribute("tweet", "Persiapan open mind jangan lupa !! @Dwi");
+g.getNode("94").addAttribute("mention", "Dwi");
+
+g.addEdge("2517", "47", "94").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2518", "0", "94").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("95");
+g.getNode("95").addAttribute("tweet", "Set.Then.Go! @Ayu");
+g.getNode("95").addAttribute("mention", "Ayu");
+
+g.addEdge("2519", "48", "95").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2520", "10", "95").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("96");
+g.getNode("96").addAttribute("tweet", "Lonely Jail");
+
+g.addEdge("2521", "49", "96").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("97");
+g.getNode("97").addAttribute("tweet", "IchNiSanShi");
+
+g.addEdge("2522", "0", "97").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("98");
+g.getNode("98").addAttribute("tweet", "Ditungguin gak muncul lah -_- @Eka");
+g.getNode("98").addAttribute("mention", "Eka");
+
+g.addEdge("2523", "1", "98").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2524", "8", "98").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("99");
+g.getNode("99").addAttribute("tweet", "Kuliah lah @Agung");
+g.getNode("99").addAttribute("mention", "Agung");
+
+g.addEdge("2525", "2", "99").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+g.addEdge("2526", "19", "99").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.addNode("100");
+g.getNode("100").addAttribute("tweet", "This is the last!");
+
+g.addEdge("2527", "3", "100").addAttribute("tanggal", "Sun Feb 07 09:50:33 ICT 2013");
+
+g.getEdge("2457").addAttribute("ui.label", "follow");
+g.getEdge("2458").addAttribute("ui.label", "follow");
+g.getEdge("2459").addAttribute("ui.label", "follow");
+g.getEdge("2460").addAttribute("ui.label", "follow");
+g.getEdge("2461").addAttribute("ui.label", "follow");
+g.getEdge("2462").addAttribute("ui.label", "follow");
+g.getEdge("2463").addAttribute("ui.label", "follow");
+g.getEdge("2464").addAttribute("ui.label", "follow");
+g.getEdge("2465").addAttribute("ui.label", "follow");
+g.getEdge("2466").addAttribute("ui.label", "follow");
+g.getEdge("2467").addAttribute("ui.label", "follow");
+g.getEdge("2468").addAttribute("ui.label", "follow");
+g.getEdge("2469").addAttribute("ui.label", "follow");
+g.getEdge("2470").addAttribute("ui.label", "follow");
+g.getEdge("2471").addAttribute("ui.label", "follow");
+g.getEdge("2472").addAttribute("ui.label", "follow");
+g.getEdge("2473").addAttribute("ui.label", "follow");
+g.getEdge("2474").addAttribute("ui.label", "follow");
+g.getEdge("2475").addAttribute("ui.label", "follow");
+g.getEdge("2476").addAttribute("ui.label", "follow");
+g.getEdge("2477").addAttribute("ui.label", "follow");
+g.getEdge("2478").addAttribute("ui.label", "follow");
+g.getEdge("2479").addAttribute("ui.label", "follow");
+g.getEdge("2480").addAttribute("ui.label", "follow");
+g.getEdge("2481").addAttribute("ui.label", "follow");
+g.getEdge("2482").addAttribute("ui.label", "follow");
+g.getEdge("2483").addAttribute("ui.label", "follow");
+g.getEdge("2484").addAttribute("ui.label", "follow");
+g.getEdge("2485").addAttribute("ui.label", "follow");
+g.getEdge("2486").addAttribute("ui.label", "follow");
+g.getEdge("2487").addAttribute("ui.label", "follow");
+g.getEdge("2488").addAttribute("ui.label", "follow");
+g.getEdge("2489").addAttribute("ui.label", "follow");
+g.getEdge("2490").addAttribute("ui.label", "follow");
+g.getEdge("2491").addAttribute("ui.label", "follow");
+g.getEdge("2492").addAttribute("ui.label", "follow");
+g.getEdge("2493").addAttribute("ui.label", "follow");
+g.getEdge("2494").addAttribute("ui.label", "follow");
+g.getEdge("2495").addAttribute("ui.label", "follow");
+g.getEdge("2496").addAttribute("ui.label", "follow");
+g.getEdge("2497").addAttribute("ui.label", "follow");
+g.getEdge("2498").addAttribute("ui.label", "follow");
+g.getEdge("2499").addAttribute("ui.label", "follow");
+g.getEdge("2500").addAttribute("ui.label", "follow");
+g.getEdge("2501").addAttribute("ui.label", "follow");
+g.getEdge("2502").addAttribute("ui.label", "follow");
+g.getEdge("2503").addAttribute("ui.label", "follow");
+g.getEdge("2504").addAttribute("ui.label", "follow");
+g.getEdge("2505").addAttribute("ui.label", "follow");
+g.getEdge("2506").addAttribute("ui.label", "follow");
+g.getEdge("2507").addAttribute("ui.label", "follow");
+g.getEdge("2508").addAttribute("ui.label", "follow");
+g.getEdge("2509").addAttribute("ui.label", "follow");
+g.getEdge("2510").addAttribute("ui.label", "follow");
+g.getEdge("2511").addAttribute("ui.label", "follow");
+g.getEdge("2512").addAttribute("ui.label", "follow");
+g.getEdge("2513").addAttribute("ui.label", "follow");
+g.getEdge("2514").addAttribute("ui.label", "follow");
+g.getEdge("2515").addAttribute("ui.label", "follow");
+g.getEdge("2516").addAttribute("ui.label", "follow");
+g.getEdge("2517").addAttribute("ui.label", "follow");
+g.getEdge("2518").addAttribute("ui.label", "follow");
+g.getEdge("2519").addAttribute("ui.label", "follow");
+g.getEdge("2520").addAttribute("ui.label", "follow");
+g.getEdge("2521").addAttribute("ui.label", "follow");
+g.getEdge("2522").addAttribute("ui.label", "follow");
+g.getEdge("2523").addAttribute("ui.label", "follow");
+g.getEdge("2524").addAttribute("ui.label", "follow");
+g.getEdge("2525").addAttribute("ui.label", "follow");
+g.getEdge("2526").addAttribute("ui.label", "follow");
+g.getEdge("2527").addAttribute("ui.label", "follow");

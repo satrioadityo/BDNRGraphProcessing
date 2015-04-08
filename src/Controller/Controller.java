@@ -305,19 +305,26 @@ public class Controller implements ActionListener{
                 " stroke-width: 1px;"+
                 "}"+
                 "node.Person {"+
-                " fill-color: blue;"+
-                " size: 15px;"+
+                " fill-color: blue, black;"+
+                " fill-mode: gradient-diagonal1;"+
+                " size: 5px;"+
+                "}"+
+                "node.Tweet {"+
+                " fill-color: green;"+
+                " size: 5px;"+
+                "}"+
+                "edge {"+
+                " fill-color: black;"+
+                " arrow-shape: arrow;"+
+                " arrow-size: 200px,100px;"+
                 "}";
             
             m.getG().addAttribute("ui.stylesheet", styleSheet);
-//            m.getG().getNode("0").addAttribute("ui.class", "Person");
-//            m.getG().getNode("0").addAttribute("ui.label", "Dwi");
+            Viewer viewer = new Viewer(m.getG(), Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+            View view = viewer.addDefaultView(false);
+            m.getPaneUtama().add(view);
+            m.getTxtPresent().setVisible(false);
             m.getG().display();
-//            while(m.getG().getNodeIterator().hasNext()){
-//                if (m.getG().getEdgeCount() == 0){
-//                    System.out.println(m.getG().getNodeIterator().next());
-//                }
-//            }
         }
     }
 }

@@ -1,0 +1,230 @@
+g.addNode("50");
+g.getNode("50").addAttribute("tweet", "Pemerintah kayanya mulai aneh sekarang");
+g.getNode("50").addAttribute("ui.class", "Tweet");
+
+g.addNode("51");
+g.getNode("51").addAttribute("tweet", "#SaveHajiLulung");
+g.getNode("51").addAttribute("ui.class", "Tweet");
+
+g.addNode("52");
+g.getNode("52").addAttribute("tweet", "#np Hatsune Miku - Happy End Gretel");
+g.getNode("52").addAttribute("ui.class", "Tweet");
+
+g.addNode("53");
+g.getNode("53").addAttribute("tweet", "Besok jadi kan kumpul di kampus ? cc : @Kusuma @Kurnia");
+g.getNode("53").addAttribute("mention", "Kusuma");
+g.getNode("53").addAttribute("mention", "Kurnia");
+g.getNode("53").addAttribute("ui.class", "Tweet");
+
+g.addNode("54");
+g.getNode("54").addAttribute("tweet", "Freedom!");
+g.getNode("54").addAttribute("ui.class", "Tweet");
+
+g.addNode("55");
+g.getNode("55").addAttribute("tweet", "jar ke kosan dong, penting @Fajar");
+g.getNode("55").addAttribute("mention", "Fajar");
+g.getNode("55").addAttribute("ui.class", "Tweet");
+
+g.addNode("56");
+g.getNode("56").addAttribute("tweet", "BuckinsRobin againz w/ @Arif @Rizki @Ni");
+g.getNode("56").addAttribute("mention", "Arif");
+g.getNode("56").addAttribute("mention", "Rizki");
+g.getNode("56").addAttribute("mention", "Ni");
+g.getNode("56").addAttribute("ui.class", "Tweet");
+
+g.addNode("57");
+g.getNode("57").addAttribute("tweet", "Kalo @Kartika bilang sih - 'Meh-in aja' =)) ");
+g.getNode("57").addAttribute("mention", "Kartika");
+g.getNode("57").addAttribute("ui.class", "Tweet");
+
+g.addNode("58");
+g.getNode("58").addAttribute("tweet", "#YOLO");
+g.getNode("58").addAttribute("ui.class", "Tweet");
+
+g.addNode("59");
+g.getNode("59").addAttribute("tweet", "Take over the world - 54%");
+g.getNode("59").addAttribute("ui.class", "Tweet");
+
+g.addNode("60");
+g.getNode("60").addAttribute("tweet", "So did I...");
+g.getNode("60").addAttribute("ui.class", "Tweet");
+
+g.addNode("61");
+g.getNode("61").addAttribute("tweet", "This is gonna be my first tweet :)");
+g.getNode("50").addAttribute("ui.class", "Tweet");
+
+g.addNode("62");
+g.getNode("62").addAttribute("tweet", "tinyurl.com/asdasd @Putri @Sari @Eka");
+g.getNode("62").addAttribute("mention", "Putri");
+g.getNode("62").addAttribute("mention", "Sari");
+g.getNode("62").addAttribute("mention", "Eka");
+g.getNode("62").addAttribute("ui.class", "Tweet");
+
+g.addNode("63");
+g.getNode("63").addAttribute("tweet", "Dasar cowo gitu semua!!");
+g.getNode("63").addAttribute("ui.class", "Tweet");
+
+g.addNode("64");
+g.getNode("64").addAttribute("tweet", "Kapan kawin :(");
+g.getNode("64").addAttribute("ui.class", "Tweet");
+
+g.addNode("65");
+g.getNode("65").addAttribute("tweet", "Move Move cc : @Andi");
+g.getNode("65").addAttribute("mention", "Andi");
+g.getNode("65").addAttribute("ui.class", "Tweet");
+
+g.addNode("66");
+g.getNode("66").addAttribute("tweet", "Di kerumah lah @Andi");
+g.getNode("66").addAttribute("mention", "Andi");
+g.getNode("66").addAttribute("ui.class", "Tweet");
+
+g.addNode("67");
+g.getNode("67").addAttribute("tweet", "Jalan2 w/ @Andi");
+g.getNode("67").addAttribute("mention", "Andi");
+g.getNode("67").addAttribute("ui.class", "Tweet");
+
+g.addNode("68");
+g.getNode("68").addAttribute("tweet", "EarthBOUNDDDDDD");
+g.getNode("68").addAttribute("ui.class", "Tweet");
+
+g.addNode("69");
+g.getNode("69").addAttribute("tweet", "Let me tell you this: if you meet a loner, no matter what they tell you, it's not because they enjoy solitude. It's because they have tried to blend into the world before, and people continue to disappoint them.");
+g.getNode("69").addAttribute("ui.class", "Tweet");
+
+g.addNode("70");
+g.getNode("70").addAttribute("tweet", "Love is like a double-edged sword");
+g.getNode("70").addAttribute("ui.class", "Tweet");
+
+g.addNode("71");
+g.getNode("71").addAttribute("tweet", "Ronerrry Shitooo");
+g.getNode("71").addAttribute("ui.class", "Tweet");
+
+g.addNode("72");
+g.getNode("72").addAttribute("tweet", "#NP Hatsune Miku - Love is War");
+g.getNode("72").addAttribute("ui.class", "Tweet");
+
+g.addNode("73");
+g.getNode("73").addAttribute("tweet", "Home Alone");
+g.getNode("73").addAttribute("ui.class", "Tweet");
+
+g.addNode("74");
+g.getNode("74").addAttribute("tweet", "Besok bareng yaaaa @Eka");
+g.getNode("74").addAttribute("mention", "Eka");
+g.getNode("74").addAttribute("ui.class", "Tweet");
+
+g.addNode("75");
+g.getNode("75").addAttribute("tweet", "Oke @Pratiwi");
+g.getNode("75").addAttribute("mention", "Pratiwi");
+g.getNode("75").addAttribute("ui.class", "Tweet");
+
+g.addNode("76");
+g.getNode("76").addAttribute("tweet", "AKhirnya nyampe rumah");
+g.getNode("76").addAttribute("ui.class", "Tweet");
+
+g.addNode("77");
+g.getNode("77").addAttribute("tweet", "Ronerrry Shitooo");
+g.getNode("77").addAttribute("ui.class", "Tweet");
+
+g.addNode("78");
+g.getNode("78").addAttribute("tweet", "Aku udah dirumah yaaaa @Ayu");
+g.getNode("78").addAttribute("mention", "Ayu");
+g.getNode("78").addAttribute("ui.class", "Tweet");
+
+g.addNode("79");
+g.getNode("79").addAttribute("tweet", "Yakimochi wo Yaite");
+g.getNode("79").addAttribute("ui.class", "Tweet");
+
+g.addNode("80");
+g.getNode("80").addAttribute("tweet", "Mageline <3");
+g.getNode("80").addAttribute("ui.class", "Tweet");
+
+g.addNode("81");
+g.getNode("81").addAttribute("tweet", "Sayonaraaaaaa");
+g.getNode("81").addAttribute("ui.class", "Tweet");
+
+g.addNode("82");
+g.getNode("82").addAttribute("tweet", "#np Supercell Sayonara Memories");
+g.getNode("82").addAttribute("ui.class", "Tweet");
+
+g.addNode("83");
+g.getNode("83").addAttribute("tweet", "Ada lagu baru enakeun lohhhh.. dicek nih Hatsune Miku - World is mine cc @Wulandari");
+g.getNode("83").addAttribute("mention", "Wulandari");
+g.getNode("83").addAttribute("ui.class", "Tweet");
+
+g.addNode("84");
+g.getNode("84").addAttribute("tweet", "Ntar maleman aja kesininya, jgn sore aku gk dikosan @Ni");
+g.getNode("84").addAttribute("mention", "Ni");
+g.getNode("84").addAttribute("ui.class", "Tweet");
+
+g.addNode("85");
+g.getNode("85").addAttribute("tweet", "Mikuuuu <3");
+g.getNode("85").addAttribute("ui.class", "Tweet");
+
+g.addNode("86");
+g.getNode("86").addAttribute("tweet", "Besok kerkom ngerjain ai yaaa @Wulandari @Ni @Ayu");
+g.getNode("86").addAttribute("mention", "Wulandari");
+g.getNode("86").addAttribute("mention", "Ni");
+g.getNode("86").addAttribute("mention", "Ayu");
+g.getNode("86").addAttribute("ui.class", "Tweet");
+
+g.addNode("87");
+g.getNode("87").addAttribute("tweet", "This.World!");
+g.getNode("87").addAttribute("ui.class", "Tweet");
+
+g.addNode("88");
+g.getNode("88").addAttribute("tweet", "Boku ga Black Raison Detre");
+g.getNode("88").addAttribute("ui.class", "Tweet");
+
+g.addNode("89");
+g.getNode("89").addAttribute("tweet", "Reality Be Rent, Synapse Break, Banishment Thisu Worldooooo");
+g.getNode("89").addAttribute("ui.class", "Tweet");
+
+g.addNode("90");
+g.getNode("90").addAttribute("tweet", "Cek PM yaaa @Retno");
+g.getNode("90").addAttribute("mention", "Retno");
+g.getNode("90").addAttribute("ui.class", "Tweet");
+
+g.addNode("91");
+g.getNode("91").addAttribute("tweet", "Meni gak ngabarin :( @Dwi");
+g.getNode("91").addAttribute("mention", "Dwi");
+g.getNode("91").addAttribute("ui.class", "Tweet");
+
+g.addNode("92");
+g.getNode("92").addAttribute("tweet", "I can't do anything, can I ?");
+g.getNode("92").addAttribute("ui.class", "Tweet");
+
+g.addNode("93");
+g.getNode("93").addAttribute("tweet", "My world is falling down");
+g.getNode("93").addAttribute("ui.class", "Tweet");
+
+g.addNode("94");
+g.getNode("94").addAttribute("tweet", "Persiapan open mind jangan lupa !! @Dwi");
+g.getNode("94").addAttribute("mention", "Dwi");
+g.getNode("94").addAttribute("ui.class", "Tweet");
+
+g.addNode("95");
+g.getNode("95").addAttribute("tweet", "Set.Then.Go! @Ayu");
+g.getNode("95").addAttribute("mention", "Ayu");
+g.getNode("95").addAttribute("ui.class", "Tweet");
+
+g.addNode("96");
+g.getNode("96").addAttribute("tweet", "Lonely Jail");
+g.getNode("96").addAttribute("ui.class", "Tweet");
+
+g.addNode("97");
+g.getNode("97").addAttribute("tweet", "IchNiSanShi");
+g.getNode("97").addAttribute("ui.class", "Tweet");
+
+g.addNode("98");
+g.getNode("98").addAttribute("tweet", "Ditungguin gak muncul lah -_- @Eka");
+g.getNode("98").addAttribute("mention", "Eka");
+g.getNode("98").addAttribute("ui.class", "Tweet");
+
+g.addNode("99");
+g.getNode("99").addAttribute("tweet", "Kuliah lah @Agung");
+g.getNode("99").addAttribute("mention", "Agung");
+g.getNode("99").addAttribute("ui.class", "Tweet");
+
+g.addNode("100");
+g.getNode("100").addAttribute("tweet", "This is the last!");
+g.getNode("100").addAttribute("ui.class", "Tweet");
