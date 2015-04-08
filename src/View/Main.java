@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JToggleButton;
 import org.graphstream.algorithm.generator.Generator;
 import org.graphstream.algorithm.generator.RandomGenerator;
 import org.graphstream.graph.implementations.Graphs;
@@ -6016,6 +6017,11 @@ public class Main extends javax.swing.JFrame{
     public JButton getBtnZoomOut() {
         return btnZoomOut;
     }
+
+    public JToggleButton getBtnCloseness() {
+        return btnCloseness;
+    }
+    
     
     
     public void addListener(ActionListener a){
@@ -6032,6 +6038,7 @@ public class Main extends javax.swing.JFrame{
         btnBetweeness.addActionListener(a);
         btnZoomIn.addActionListener(a);
         btnZoomOut.addActionListener(a);
+        btnCloseness.addActionListener(a);
     }
 
     /**
@@ -6065,6 +6072,7 @@ public class Main extends javax.swing.JFrame{
         btnBetweeness = new javax.swing.JButton();
         btnZoomOut = new javax.swing.JButton();
         btnZoomIn = new javax.swing.JButton();
+        btnCloseness = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout FrameGSLayout = new javax.swing.GroupLayout(FrameGS.getContentPane());
         FrameGS.getContentPane().setLayout(FrameGSLayout);
@@ -6156,6 +6164,8 @@ public class Main extends javax.swing.JFrame{
 
         btnZoomIn.setText("+++");
 
+        btnCloseness.setText("Closeness");
+
         javax.swing.GroupLayout PaneMenuLayout = new javax.swing.GroupLayout(PaneMenu);
         PaneMenu.setLayout(PaneMenuLayout);
         PaneMenuLayout.setHorizontalGroup(
@@ -6175,9 +6185,12 @@ public class Main extends javax.swing.JFrame{
                     .addComponent(btnDiameter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnBetweeness, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PaneMenuLayout.createSequentialGroup()
-                        .addComponent(btnZoomOut)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnZoomIn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(PaneMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnCloseness, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(PaneMenuLayout.createSequentialGroup()
+                                .addComponent(btnZoomOut)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnZoomIn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -6210,7 +6223,9 @@ public class Main extends javax.swing.JFrame{
                 .addGroup(PaneMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnZoomOut)
                     .addComponent(btnZoomIn))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCloseness)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PaneMainLayout = new javax.swing.GroupLayout(PaneMain);
@@ -6299,6 +6314,7 @@ public class Main extends javax.swing.JFrame{
     private javax.swing.JButton btnAddEdge;
     private javax.swing.JButton btnAddNode;
     private javax.swing.JButton btnBetweeness;
+    private javax.swing.JToggleButton btnCloseness;
     private javax.swing.JButton btnDeleteAttribute;
     private javax.swing.JButton btnDeleteEdge;
     private javax.swing.JButton btnDeleteNode;

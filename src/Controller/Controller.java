@@ -22,6 +22,7 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import org.graphstream.algorithm.BetweennessCentrality;
 import org.graphstream.algorithm.Toolkit;
+import org.graphstream.algorithm.measure.ClosenessCentrality;
 import org.graphstream.graph.Node;
 import org.graphstream.stream.ProxyPipe;
 import org.graphstream.ui.swingViewer.DefaultView;
@@ -287,18 +288,34 @@ public class Controller implements ActionListener{
             m.getTxtPresent().setText("Diameter graph : "+Toolkit.diameter(m.getG()));
         }
         else if (e.equals(m.getBtnBetweeness())){
-            // button graph display in main performed
+            // button betweeness graph display in main performed
             BetweennessCentrality bcb = new BetweennessCentrality();
             bcb.setWeightAttributeName("weight");
-//            bcb.setWeight(A, B, 1);
-//            bcb.setWeight(B, E, 6);
-//            bcb.setWeight(B, C, 5);
-//            bcb.setWeight(E, D, 2);
-//            bcb.setWeight(C, D, 3);
-//            bcb.setWeight(A, E, 4);
             bcb.init(m.getG());
             bcb.compute();
-            System.out.println("this this this is it");
+            for(Node n : m.getG().getEachNode()){
+                if ((Double)n.getAttribute("Cb")>2000){
+                    n.addAttribute("ui.class", "between");
+                }
+//                System.out.println(n.getAttribute("name")+", "+n.getAttribute("Cb"));
+            }
+            m.getG().display();
+        }
+        else if (e.equals(m.getBtnCloseness())){
+            // button closeness graph display in main performed
+            ClosenessCentrality cc = new ClosenessCentrality("Cc");
+            cc.init(m.getG());
+            cc.compute();
+            Double maxCc = m.getG().getNode("1").getAttribute("Cc");
+            Node temp = null;
+            for(Node n : m.getG().getEachNode()){
+                if ((Double)n.getAttribute("Cc")>maxCc){
+                    temp = n;
+                }
+            }
+            temp.addAttribute("ui.class", "closeness");
+//            System.out.println(temp.getAttribute("name")+", "+temp.getAttribute("Cc"));
+            m.getG().display();
         }
         else if (e.equals(m.getBtnDisplayGraph())){
             // button graph display in main performed
@@ -312,11 +329,19 @@ public class Controller implements ActionListener{
                 "node.Person {"+
                 " fill-color: blue, black;"+
                 " fill-mode: gradient-diagonal1;"+
-                " size: 5px;"+
+                " size: 10px;"+
                 "}"+
                 "node.Tweet {"+
                 " fill-color: green;"+
-                " size: 5px;"+
+                " size: 10px;"+
+                "}"+
+                "node.between {"+
+                " fill-color: red;"+
+                " size: 20px;"+
+                "}"+
+                "node.closeness {"+
+                " fill-color: black;"+
+                " size: 20px;"+
                 "}"+
                 "edge {"+
                 " fill-color: black;"+
