@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import org.graphstream.algorithm.BetweennessCentrality;
 import org.graphstream.algorithm.Toolkit;
 import org.graphstream.graph.Node;
+import org.graphstream.stream.ProxyPipe;
 import org.graphstream.ui.swingViewer.DefaultView;
 import org.graphstream.ui.swingViewer.View;
 import org.graphstream.ui.swingViewer.Viewer;
@@ -42,6 +43,8 @@ public class Controller implements ActionListener{
     private ViewNodeView vnv;
     private ViewEdgeView vev;
     private Iterator<String> key;
+    Viewer viewer;
+    View view;
 
     public Controller() {
         m = new Main();
@@ -53,6 +56,8 @@ public class Controller implements ActionListener{
         dav = new DeleteAttributeView();
         vnv = new ViewNodeView();
         vev = new ViewEdgeView();
+        
+//        viewer = new Viewer(m.getG(), Viewer.ThreadingModel.GRAPH_IN_SWING_THREAD);
         
         m.setVisible(true);
         m.addListener(this);
@@ -320,11 +325,40 @@ public class Controller implements ActionListener{
                 "}";
             
             m.getG().addAttribute("ui.stylesheet", styleSheet);
-            Viewer viewer = new Viewer(m.getG(), Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
-            View view = viewer.addDefaultView(false);
-            m.getPaneUtama().add(view);
-            m.getTxtPresent().setVisible(false);
+//            Viewer viewer2 = new Viewer(m.getG(), Viewer.ThreadingModel.GRAPH_IN_SWING_THREAD);
+//            View view2 = viewer2.addDefaultView(true);
+//            m.getFrameGS().add(view2);
+//            m.getFrameGS().setVisible(true);
+            
+            
+            viewer = m.getG().display();
+            view = viewer.addDefaultView(false);
+            view = viewer.getDefaultView();
+//            view.getCamera().setViewPercent(0.7);
+//            m.getTxtPresent().setVisible(false);
             m.getG().display();
         }
+        else if (e.equals(m.getBtnZoomIn())){
+            // button zoom in display in main performed
+            viewer.close();
+            viewer = m.getG().display();
+            view = viewer.addDefaultView(false);
+            view = viewer.getDefaultView();
+            view.getCamera().setViewPercent(view.getCamera().getViewPercent()-100);
+            m.getG().display();
+            System.err.println("blm bisa");
+        }
+        else if (e.equals(m.getBtnZoomOut())){
+            // button zoom in display in main performed
+            clicked+=1;
+            viewer.close();
+            viewer = m.getG().display();
+            view = viewer.addDefaultView(false);
+            view = viewer.getDefaultView();
+            view.getCamera().setViewPercent(view.getCamera().getViewPercent()+100*clicked);
+            m.getG().display();
+            System.err.println("blm bisa");
+        }
     }
+    int clicked = 0;
 }

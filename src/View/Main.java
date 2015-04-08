@@ -8,6 +8,7 @@ package View;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import org.graphstream.algorithm.generator.Generator;
@@ -977,6 +978,114 @@ public class Main extends javax.swing.JFrame{
         g.getEdge("2525").addAttribute("ui.label", "tweet");
         g.getEdge("2526").addAttribute("ui.label", "tweet");
         g.getEdge("2527").addAttribute("ui.label", "tweet");
+        g.addEdge("2528", "53", "3").addAttribute("relation", "mention");
+        g.getEdge("2528").addAttribute("ui.label", "mention");
+
+        g.addEdge("2529", "53", "49").addAttribute("relation", "mention");
+        g.getEdge("2529").addAttribute("ui.label", "mention");
+
+        g.addEdge("2530", "56", "29").addAttribute("relation", "mention");
+        g.getEdge("2530").addAttribute("ui.label", "mention");
+        g.addEdge("2531", "56", "34").addAttribute("relation", "mention");
+        g.getEdge("2531").addAttribute("ui.label", "mention");
+        g.addEdge("2532", "56", "28").addAttribute("relation", "mention");
+        g.getEdge("2532").addAttribute("ui.label", "mention");
+
+        g.addEdge("2533", "57", "38").addAttribute("relation", "mention");
+        g.getEdge("2533").addAttribute("ui.label", "mention");
+
+        g.addEdge("2534", "62", "7").addAttribute("relation", "mention");
+        g.getEdge("2534").addAttribute("ui.label", "mention");
+        g.addEdge("2535", "62", "9").addAttribute("relation", "mention");
+        g.getEdge("2535").addAttribute("ui.label", "mention");
+        g.addEdge("2536", "62", "8").addAttribute("relation", "mention");
+        g.getEdge("2536").addAttribute("ui.label", "mention");
+
+        g.addEdge("2537", "65", "18").addAttribute("relation", "mention");
+        g.getEdge("2537").addAttribute("ui.label", "mention");
+
+        g.addEdge("2538", "66", "18").addAttribute("relation", "mention");
+        g.getEdge("2538").addAttribute("ui.label", "mention");
+
+        g.addEdge("2539", "67", "18").addAttribute("relation", "mention");
+        g.getEdge("2539").addAttribute("ui.label", "mention");
+
+        g.addEdge("2540", "74", "8").addAttribute("relation", "mention");
+        g.getEdge("2540").addAttribute("ui.label", "mention");
+
+        g.addEdge("2541", "78", "10").addAttribute("relation", "mention");
+        g.getEdge("2541").addAttribute("ui.label", "mention");
+
+        g.addEdge("2542", "83", "39").addAttribute("relation", "mention");
+        g.getEdge("2542").addAttribute("ui.label", "mention");
+
+        g.addEdge("2543", "84", "28").addAttribute("relation", "mention");
+        g.getEdge("2543").addAttribute("ui.label", "mention");
+
+        g.addEdge("2544", "86", "10").addAttribute("relation", "mention");
+        g.getEdge("2544").addAttribute("ui.label", "mention");
+        g.addEdge("2545", "86", "28").addAttribute("relation", "mention");
+        g.getEdge("2545").addAttribute("ui.label", "mention");
+        g.addEdge("2546", "86", "39").addAttribute("relation", "mention");
+        g.getEdge("2546").addAttribute("ui.label", "mention");
+
+        g.addEdge("2547", "90", "48").addAttribute("relation", "mention");
+        g.getEdge("2547").addAttribute("ui.label", "mention");
+
+        g.addEdge("2548", "91", "0").addAttribute("relation", "mention");
+        g.getEdge("2548").addAttribute("ui.label", "mention");
+
+        g.addEdge("2549", "94", "0").addAttribute("relation", "mention");
+        g.getEdge("2549").addAttribute("ui.label", "mention");
+
+        g.addEdge("2550", "95", "10").addAttribute("relation", "mention");
+        g.getEdge("2550").addAttribute("ui.label", "mention");
+
+        g.addEdge("2551", "98", "8").addAttribute("relation", "mention");
+        g.getEdge("2551").addAttribute("ui.label", "mention");
+
+        g.addEdge("2552", "99", "19").addAttribute("relation", "mention");
+        g.getEdge("2552").addAttribute("ui.label", "mention");
+
+        g.addEdge("2553", "93", "2").addAttribute("relation", "mention");
+        g.getEdge("2553").addAttribute("ui.label", "mention");
+
+        g.addEdge("2554", "77", "3").addAttribute("relation", "mention");
+        g.getEdge("2554").addAttribute("ui.label", "mention");
+
+        g.addEdge("2555", "82", "4").addAttribute("relation", "mention");
+        g.getEdge("2555").addAttribute("ui.label", "mention");
+
+        g.addEdge("2556", "89", "5").addAttribute("relation", "mention");
+        g.getEdge("2556").addAttribute("ui.label", "mention");
+
+        g.addEdge("2557", "88", "6").addAttribute("relation", "mention");
+        g.getEdge("2557").addAttribute("ui.label", "mention");
+
+        g.addEdge("2558", "79", "7").addAttribute("relation", "mention");
+        g.getEdge("2558").addAttribute("ui.label", "mention");
+
+        g.addEdge("2559", "69", "8").addAttribute("relation", "mention");
+        g.getEdge("2559").addAttribute("ui.label", "mention");
+
+        g.addEdge("2560", "71", "9").addAttribute("relation", "mention");
+        g.getEdge("2560").addAttribute("ui.label", "mention");
+
+        g.addEdge("2561", "72", "10").addAttribute("relation", "mention");
+        g.getEdge("2561").addAttribute("ui.label", "mention");
+
+        g.addEdge("2562", "80", "11").addAttribute("relation", "mention");
+        g.getEdge("2562").addAttribute("ui.label", "mention");
+
+        g.addEdge("2563", "72", "12").addAttribute("relation", "mention");
+        g.getEdge("2563").addAttribute("ui.label", "mention");
+
+        g.addEdge("2564", "70", "13").addAttribute("relation", "mention");
+        g.getEdge("2564").addAttribute("ui.label", "mention");
+        
+        g.addEdge("2565", "73", "14").addAttribute("relation", "mention");
+        g.getEdge("2565").addAttribute("ui.label", "mention");
+
 //        g.addEdge("21", "0", "22").addAttribute("relation", "follow");
 //        g.addEdge("21", "0", "22").addAttribute("since", "Sun Jan 16 18:59:39 ICT 1955");
 //        g.addEdge("22", "0", "23").addAttribute("relation", "follow");
@@ -5895,6 +6004,19 @@ public class Main extends javax.swing.JFrame{
     public JPanel getPaneUtama() {
         return PaneUtama;
     }    
+
+    public JFrame getFrameGS() {
+        return FrameGS;
+    }
+
+    public JButton getBtnZoomIn() {
+        return btnZoomIn;
+    }
+
+    public JButton getBtnZoomOut() {
+        return btnZoomOut;
+    }
+    
     
     public void addListener(ActionListener a){
         btnAddNode.addActionListener(a);
@@ -5908,6 +6030,8 @@ public class Main extends javax.swing.JFrame{
         btnViewEdge.addActionListener(a);
         btnDiameter.addActionListener(a);
         btnBetweeness.addActionListener(a);
+        btnZoomIn.addActionListener(a);
+        btnZoomOut.addActionListener(a);
     }
 
     /**
@@ -5920,6 +6044,7 @@ public class Main extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        FrameGS = new javax.swing.JFrame();
         PaneMain = new javax.swing.JPanel();
         PaneTitle = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
@@ -5938,6 +6063,19 @@ public class Main extends javax.swing.JFrame{
         btnViewEdge = new javax.swing.JButton();
         btnDiameter = new javax.swing.JButton();
         btnBetweeness = new javax.swing.JButton();
+        btnZoomOut = new javax.swing.JButton();
+        btnZoomIn = new javax.swing.JButton();
+
+        javax.swing.GroupLayout FrameGSLayout = new javax.swing.GroupLayout(FrameGS.getContentPane());
+        FrameGS.getContentPane().setLayout(FrameGSLayout);
+        FrameGSLayout.setHorizontalGroup(
+            FrameGSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        FrameGSLayout.setVerticalGroup(
+            FrameGSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 650));
@@ -5978,7 +6116,7 @@ public class Main extends javax.swing.JFrame{
             PaneUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PaneUtamaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PaneUtamaLayout.setVerticalGroup(
@@ -6014,6 +6152,10 @@ public class Main extends javax.swing.JFrame{
 
         btnBetweeness.setText("Betweeness");
 
+        btnZoomOut.setText("---");
+
+        btnZoomIn.setText("+++");
+
         javax.swing.GroupLayout PaneMenuLayout = new javax.swing.GroupLayout(PaneMenu);
         PaneMenu.setLayout(PaneMenuLayout);
         PaneMenuLayout.setHorizontalGroup(
@@ -6031,7 +6173,12 @@ public class Main extends javax.swing.JFrame{
                     .addComponent(btnViewNode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnViewEdge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDiameter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBetweeness, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnBetweeness, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(PaneMenuLayout.createSequentialGroup()
+                        .addComponent(btnZoomOut)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnZoomIn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PaneMenuLayout.setVerticalGroup(
@@ -6059,7 +6206,11 @@ public class Main extends javax.swing.JFrame{
                 .addComponent(btnDiameter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBetweeness)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PaneMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnZoomOut)
+                    .addComponent(btnZoomIn))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PaneMainLayout = new javax.swing.GroupLayout(PaneMain);
@@ -6139,6 +6290,7 @@ public class Main extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame FrameGS;
     private javax.swing.JPanel PaneMain;
     private javax.swing.JPanel PaneMenu;
     private javax.swing.JPanel PaneTitle;
@@ -6154,6 +6306,8 @@ public class Main extends javax.swing.JFrame{
     private javax.swing.JButton btnDisplayGraph;
     private javax.swing.JButton btnViewEdge;
     private javax.swing.JButton btnViewNode;
+    private javax.swing.JButton btnZoomIn;
+    private javax.swing.JButton btnZoomOut;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextArea txtPresent;
