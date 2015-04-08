@@ -17,14 +17,19 @@ import View.ViewEdgeView;
 import View.ViewNodeView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.graphstream.algorithm.BetweennessCentrality;
 import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.measure.ClosenessCentrality;
 import org.graphstream.graph.Node;
 import org.graphstream.stream.ProxyPipe;
+import org.graphstream.stream.file.FileSinkDGS;
+import org.graphstream.stream.file.FileSourceDGS;
 import org.graphstream.ui.swingViewer.DefaultView;
 import org.graphstream.ui.swingViewer.View;
 import org.graphstream.ui.swingViewer.Viewer;
@@ -114,8 +119,15 @@ public class Controller implements ActionListener{
             String value = anv.getTxtValue().getText();
             
             if (!"".equals(anv.getTxtID().getText())){
-                m.getG().addNode(id);
+                if("name".equals(key)){
+                    m.getG().addNode(id).addAttribute("ui.class", "Person");
+                }
+                else if("tweet".equals(key)){
+                    m.getG().addNode(id).addAttribute("ui.class", "Tweet");
+                }
+                
                 m.getG().getNode(id).setAttribute(key, value);
+                m.getG().getNode(id).setAttribute("ui.label", m.getG().getNode(id).getAttribute(key).toString());
                 JOptionPane.showMessageDialog(anv, "Node berhasil ditambahkan", "Success", 
                         JOptionPane.INFORMATION_MESSAGE);
                 anv.setVisible(false);
@@ -492,6 +504,29 @@ public class Controller implements ActionListener{
             view.getCamera().setViewPercent(view.getCamera().getViewPercent()+100*clicked);
             m.getG().display();
             System.err.println("blm bisa");
+        }
+        else if (e.equals(m.getBtnSaveGraph())){
+            FileSinkDGS fsdgs = new FileSinkDGS();
+            try {
+                fsdgs.writeAll(m.getG(), "graphtweet.dgs");
+                System.out.println("success");
+            } catch (IOException ex) {
+                System.err.println("no no nooooo!");
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else if (e.equals(m.getBtnLoadGraph())){
+            FileSourceDGS fs = new FileSourceDGS();
+
+            fs.addSink(m.getG());
+
+            try {
+              fs.readAll("graphtweet.dgs");
+            } catch( IOException ee) {
+                System.err.println("no no nooooo!");
+            } finally {
+              fs.removeSink(m.getG());
+            }
         }
     }
     int clicked = 0;

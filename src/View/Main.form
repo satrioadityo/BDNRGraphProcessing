@@ -196,7 +196,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnCloseness" max="32767" attributes="0"/>
@@ -211,13 +211,14 @@
                           <Component id="btnViewEdge" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnDiameter" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnBetweeness" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnZoomOut" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                              <Component id="btnZoomIn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
                           <Component id="btnColoringNode" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="btnZoomOut" min="-2" pref="46" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnZoomIn" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="btnSaveGraph" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnLoadGraph" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -257,7 +258,11 @@
                       <Component id="btnCloseness" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnColoringNode" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnSaveGraph" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnLoadGraph" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -336,6 +341,16 @@
             <Component class="javax.swing.JToggleButton" name="btnColoringNode">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Coloring Node"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="btnSaveGraph">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Save Graph"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="btnLoadGraph">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Load Graph"/>
               </Properties>
             </Component>
           </SubComponents>
