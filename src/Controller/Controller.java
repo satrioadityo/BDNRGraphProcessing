@@ -299,7 +299,7 @@ public class Controller implements ActionListener{
                 }
 //                System.out.println(n.getAttribute("name")+", "+n.getAttribute("Cb"));
             }
-            m.getG().display();
+//            m.getG().display();
         }
         else if (e.equals(m.getBtnCloseness())){
             // button closeness graph display in main performed
@@ -315,19 +315,72 @@ public class Controller implements ActionListener{
             }
             temp.addAttribute("ui.class", "closeness");
 //            System.out.println(temp.getAttribute("name")+", "+temp.getAttribute("Cc"));
-            m.getG().display();
+//            m.getG().display();
+        }
+        else if (e.equals(m.getBtnColoringNode())){
+            // button coloring node graph display in main performed
+            ArrayList<Integer> listDegree = new ArrayList<>();
+            for(Node n : m.getG().getEachNode()){
+                System.out.println(n.getId()+", "+n.getInDegree());
+                if(n.hasAttribute("name")){
+                    if(n.getInDegree()==0){
+                        n.addAttribute("ui.class", "PersoninDegree0");
+                    }
+                    else if(n.getInDegree()==1){
+                        n.addAttribute("ui.class", "PersoninDegree1");
+                    }
+                    else if (n.getInDegree()==2){
+                        n.addAttribute("ui.class", "PersoninDegree2");
+                    }
+                    else if (n.getInDegree()==3){
+                        n.addAttribute("ui.class", "PersoninDegree3");
+                    }
+                    else if (n.getInDegree()==4){
+                        n.addAttribute("ui.class", "PersoninDegree4");
+                    }
+                    else if (n.getInDegree()==5){
+                        n.addAttribute("ui.class", "PersoninDegree5");
+                    }
+                    else if (n.getInDegree()>5){
+                        n.addAttribute("ui.class", "PersoninDegreeLebihDari5");
+                    }
+                }
+                else if(n.hasAttribute("tweet")){
+                    if(n.getInDegree()==0){
+                        n.addAttribute("ui.class", "TweetinDegree0");
+                    }
+                    else if(n.getInDegree()==1){
+                        n.addAttribute("ui.class", "TweetinDegree1");
+                    }
+                    else if (n.getInDegree()==2){
+                        n.addAttribute("ui.class", "TweetinDegree2");
+                    }
+                    else if (n.getInDegree()==3){
+                        n.addAttribute("ui.class", "TweetinDegree3");
+                    }
+                    else if (n.getInDegree()==4){
+                        n.addAttribute("ui.class", "TweetinDegree4");
+                    }
+                    else if (n.getInDegree()==5){
+                        n.addAttribute("ui.class", "TweetinDegree5");
+                    }
+                    else if (n.getInDegree()>5){
+                        n.addAttribute("ui.class", "TweetinDegreeLebihDari5");
+                    }
+                }
+            }
         }
         else if (e.equals(m.getBtnDisplayGraph())){
             // button graph display in main performed
             String styleSheet="node {"+
-                " fill-color: grey;"+
+                " fill-color: black;"+
                 " size: 10px;"+
                 " stroke-mode: plain;"+
                 " stroke-color: black;"+
                 " stroke-width: 1px;"+
                 "}"+
                 "node.Person {"+
-                " fill-color: blue, black;"+
+                " fill-color: blue;"+
                 " fill-mode: gradient-diagonal1;"+
                 " size: 10px;"+
                 "}"+
@@ -343,10 +396,66 @@ public class Controller implements ActionListener{
                 " fill-color: black;"+
                 " size: 20px;"+
                 "}"+
+                "node.PersoninDegree0 {"+
+                " fill-color: #E0F5FF;"+
+                " size: 10px;"+
+                "}"+
+                "node.PersoninDegree1 {"+
+                " fill-color: #66CCFF;"+
+                " size: 10px;"+
+                "}"+
+                "node.PersoninDegree2 {"+
+                " fill-color: #3399FF;"+
+                " size: 10px;"+
+                "}"+
+                "node.PersoninDegree3 {"+
+                " fill-color: #0066FF;"+
+                " size: 10px;"+
+                "}"+
+                "node.PersoninDegree4 {"+
+                " fill-color: #0000FF;"+
+                " size: 10px;"+
+                "}"+
+                "node.PersoninDegree5 {"+
+                " fill-color: #0000CC;"+
+                " size: 10px;"+
+                "}"+
+                "node.PersoninDegreeLebihDari5 {"+
+                " fill-color: #0000CC;"+
+                " size: 10px;"+
+                "}"+
+                "node.TweetinDegree0 {"+
+                " fill-color: #EBFFEB;"+
+                " size: 10px;"+
+                "}"+
+                "node.TweetinDegree1 {"+
+                " fill-color: #99FF99;"+
+                " size: 10px;"+
+                "}"+
+                "node.TweetinDegree2 {"+
+                " fill-color: #8AE68A;"+
+                " size: 10px;"+
+                "}"+
+                "node.TweetinDegree3 {"+
+                " fill-color: #6BB26B;"+
+                " size: 10px;"+
+                "}"+
+                "node.TweetinDegree4 {"+
+                " fill-color: #5C995C;"+
+                " size: 10px;"+
+                "}"+
+                "node.TweetinDegree5 {"+
+                " fill-color: #4C804C;"+
+                " size: 10px;"+
+                "}"+
+                "node.TweetinDegreeLebihDari5 {"+
+                " fill-color: #2E4C2E;"+
+                " size: 10px;"+
+                "}"+
                 "edge {"+
                 " fill-color: black;"+
                 " arrow-shape: arrow;"+
-                " arrow-size: 200px,100px;"+
+                " arrow-size: 5px,5px;"+
                 "}";
             
             m.getG().addAttribute("ui.stylesheet", styleSheet);

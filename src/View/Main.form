@@ -196,9 +196,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnCloseness" max="32767" attributes="0"/>
                           <Component id="btnAddNode" max="32767" attributes="0"/>
                           <Component id="btnAddEdge" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnAddAttribute" alignment="0" max="32767" attributes="0"/>
@@ -211,16 +212,12 @@
                           <Component id="btnDiameter" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnBetweeness" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="btnCloseness" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="btnZoomOut" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btnZoomIn" min="-2" pref="57" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="btnZoomOut" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                              <Component id="btnZoomIn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="btnColoringNode" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -258,7 +255,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnCloseness" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="47" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnColoringNode" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -332,6 +331,11 @@
             <Component class="javax.swing.JToggleButton" name="btnCloseness">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Closeness"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="btnColoringNode">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Coloring Node"/>
               </Properties>
             </Component>
           </SubComponents>
