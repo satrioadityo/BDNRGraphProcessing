@@ -17,6 +17,8 @@ import View.ViewEdgeView;
 import View.ViewNodeView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,10 +29,8 @@ import org.graphstream.algorithm.BetweennessCentrality;
 import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.measure.ClosenessCentrality;
 import org.graphstream.graph.Node;
-import org.graphstream.stream.ProxyPipe;
 import org.graphstream.stream.file.FileSinkDGS;
 import org.graphstream.stream.file.FileSourceDGS;
-import org.graphstream.ui.swingViewer.DefaultView;
 import org.graphstream.ui.swingViewer.View;
 import org.graphstream.ui.swingViewer.Viewer;
 
@@ -281,10 +281,6 @@ public class Controller implements ActionListener{
             String id = vev.getTxtID().getText();
             String s = " ";
             try {
-//                while(m.getG().getEdge(id).getAttributeKeyIterator().hasNext()){
-//                    s += m.getG().getEdge(id).getAttribute(m.getG().getEdge(id).getAttributeKeySet().iterator().next());
-//                    System.out.println(s);
-//                }
                 m.getTxtPresent().setText(
                     "ID Edge : "+m.getG().getEdge(id).getId()+"\n"+
                     "Relation : "+m.getG().getEdge(id).getAttribute("relation")+"\n"/*+
@@ -306,10 +302,10 @@ public class Controller implements ActionListener{
             bcb.init(m.getG());
             bcb.compute();
             for(Node n : m.getG().getEachNode()){
-                if ((Double)n.getAttribute("Cb")>2000){
+                if ((Double)n.getAttribute("Cb")>200){
                     n.addAttribute("ui.class", "between");
                 }
-//                System.out.println(n.getAttribute("name")+", "+n.getAttribute("Cb"));
+                System.out.println(n.getAttribute("name")+", "+n.getAttribute("Cb"));
             }
 //            m.getG().display();
         }
@@ -318,12 +314,19 @@ public class Controller implements ActionListener{
             ClosenessCentrality cc = new ClosenessCentrality("Cc");
             cc.init(m.getG());
             cc.compute();
+            for(Node n : m.getG().getEachNode()){
+                if ("Infinity".equals(n.getAttribute("Cc").toString())){
+                    n.setAttribute("Cc", 0);
+                }
+                System.err.println(n.getId()+", "+n.getAttribute("Cc").toString());
+            }
             Double maxCc = m.getG().getNode("1").getAttribute("Cc");
             Node temp = null;
             for(Node n : m.getG().getEachNode()){
-                if ((Double)n.getAttribute("Cc")>maxCc){
+                if (Double.parseDouble(n.getAttribute("Cc"))>maxCc){
                     temp = n;
                 }
+                System.out.println(n.getId()+", "+n.getAttribute("Cc").toString());
             }
             temp.addAttribute("ui.class", "closeness");
 //            System.out.println(temp.getAttribute("name")+", "+temp.getAttribute("Cc"));
@@ -471,63 +474,86 @@ public class Controller implements ActionListener{
                 "}";
             
             m.getG().addAttribute("ui.stylesheet", styleSheet);
-//            Viewer viewer2 = new Viewer(m.getG(), Viewer.ThreadingModel.GRAPH_IN_SWING_THREAD);
-//            View view2 = viewer2.addDefaultView(true);
-//            m.getFrameGS().add(view2);
-//            m.getFrameGS().setVisible(true);
             
-            
-            viewer = m.getG().display();
-            view = viewer.addDefaultView(false);
-            view = viewer.getDefaultView();
-//            view.getCamera().setViewPercent(0.7);
-//            m.getTxtPresent().setVisible(false);
             m.getG().display();
         }
-        else if (e.equals(m.getBtnZoomIn())){
-            // button zoom in display in main performed
-            viewer.close();
-            viewer = m.getG().display();
-            view = viewer.addDefaultView(false);
-            view = viewer.getDefaultView();
-            view.getCamera().setViewPercent(view.getCamera().getViewPercent()-100);
-            m.getG().display();
-            System.err.println("blm bisa");
-        }
-        else if (e.equals(m.getBtnZoomOut())){
-            // button zoom in display in main performed
-            clicked+=1;
-            viewer.close();
-            viewer = m.getG().display();
-            view = viewer.addDefaultView(false);
-            view = viewer.getDefaultView();
-            view.getCamera().setViewPercent(view.getCamera().getViewPercent()+100*clicked);
-            m.getG().display();
-            System.err.println("blm bisa");
-        }
-        else if (e.equals(m.getBtnSaveGraph())){
-            FileSinkDGS fsdgs = new FileSinkDGS();
-            try {
-                fsdgs.writeAll(m.getG(), "graphtweet.dgs");
-                System.out.println("success");
-            } catch (IOException ex) {
-                System.err.println("no no nooooo!");
-                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        else if (e.equals(m.getBtnCluster())){
+            // button cluster node graph display in main performed
+            for(Node n : m.getG().getEachNode()){
+                if(n.hasAttribute("name")){
+                    System.out.println(n.getId()+", "+n.getAttribute("name"));
+                    n.addAttribute("ui.class", "Person");
+                }
+                else if(n.hasAttribute("tweet")){
+                    System.out.println(n.getId()+", "+n.getAttribute("tweet"));
+                    n.addAttribute("ui.class", "Tweet");
+                }
             }
         }
-        else if (e.equals(m.getBtnLoadGraph())){
-            FileSourceDGS fs = new FileSourceDGS();
-
-            fs.addSink(m.getG());
-
-            try {
-              fs.readAll("graphtweet.dgs");
-            } catch( IOException ee) {
-                System.err.println("no no nooooo!");
-            } finally {
-              fs.removeSink(m.getG());
+//        else if (e.equals(m.getBtnSaveGraph())){
+//            FileSinkDGS fsdgs = new FileSinkDGS();
+//            try {
+//                fsdgs.writeAll(m.getG(), "graphtweet.dgs");
+//                System.out.println("success");
+//            } catch (IOException ex) {
+//                System.err.println("no no nooooo!");
+//                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        else if (e.equals(m.getBtnLoadGraph())){
+//            FileSourceDGS fs = new FileSourceDGS();
+//
+//            fs.addSink(m.getG());
+//
+//            try {
+//              fs.readAll("graphtweet.dgs");
+//            } catch( IOException ee) {
+//                System.err.println("no no nooooo!");
+//            } finally {
+//              fs.removeSink(m.getG());
+//            }
+//        }
+        else if(e.equals(m.getMenuLoad())){
+            // load graph from file chooser
+            int returnVal = m.getChooser().showOpenDialog(m);
+            if (returnVal == m.getChooser().APPROVE_OPTION){
+                File file = m.getChooser().getSelectedFile();
+                try {
+                    m.getTxtPresent().read(new FileReader(file.getAbsolutePath()), null);
+                } catch (Exception ee) {
+                    System.err.println("no no not loaded !");
+                }
+                FileSourceDGS fs = new FileSourceDGS();
+                fs.addSink(m.getG());
+                try {
+                  fs.readAll(file.getAbsolutePath());
+                } catch( IOException ee) {
+                    System.err.println("no no nooooo!");
+                } finally {
+                  fs.removeSink(m.getG());
+                }
             }
+        }
+        else if (e.equals(m.getMenuSave())){
+            //save graph to a file
+            int returnVal = m.getChooser().showSaveDialog(m.getChooser());
+            if (returnVal == m.getChooser().APPROVE_OPTION ){
+                File file = m.getChooser().getSelectedFile();
+                FileSinkDGS fsdgs = new FileSinkDGS();
+                try {
+                    fsdgs.writeAll(m.getG(), file.getAbsolutePath());
+                    System.out.println("success");
+                } catch (IOException ex) {
+                    System.err.println("no no nooooo!");
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.out.println("save as a file "+ file.getAbsolutePath());
+            }
+        }
+        else if (e.equals(m.getMenuExit())){
+            // exit from apps
+            System.exit(1);
+            
         }
     }
-    int clicked = 0;
 }
