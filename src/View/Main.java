@@ -31,6 +31,8 @@ public class Main extends javax.swing.JFrame{
     public Main() {
         initComponents();
         g = new MultiGraph("test");
+        txtPresent.setText("");
+        txtInputQuery.setText("");
     }
 
 
@@ -121,6 +123,14 @@ public class Main extends javax.swing.JFrame{
     public JButton getBtnCluster() {
         return btnCluster;
     }
+
+    public JButton getBtnExecute() {
+        return btnExecute;
+    }
+
+    public JTextArea getTxtInputQuery() {
+        return txtInputQuery;
+    }
     
     public void addListener(ActionListener a){
         btnAddNode.addActionListener(a);
@@ -141,6 +151,7 @@ public class Main extends javax.swing.JFrame{
         menuLoad.addActionListener(a);
         menuSave.addActionListener(a);
         menuExit.addActionListener(a);
+        btnExecute.addActionListener(a);
     }
 
     /**
@@ -162,7 +173,8 @@ public class Main extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPresent = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtInputQuery = new javax.swing.JTextArea();
+        btnExecute = new javax.swing.JButton();
         PaneMenu = new javax.swing.JPanel();
         btnAddNode = new javax.swing.JButton();
         btnAddEdge = new javax.swing.JButton();
@@ -221,9 +233,11 @@ public class Main extends javax.swing.JFrame{
         txtPresent.setRows(5);
         jScrollPane1.setViewportView(txtPresent);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtInputQuery.setColumns(20);
+        txtInputQuery.setRows(5);
+        jScrollPane2.setViewportView(txtInputQuery);
+
+        btnExecute.setText("Execute");
 
         javax.swing.GroupLayout PaneUtamaLayout = new javax.swing.GroupLayout(PaneUtama);
         PaneUtama.setLayout(PaneUtamaLayout);
@@ -233,7 +247,10 @@ public class Main extends javax.swing.JFrame{
                 .addContainerGap()
                 .addGroup(PaneUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PaneUtamaLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnExecute)))
                 .addContainerGap())
         );
         PaneUtamaLayout.setVerticalGroup(
@@ -243,6 +260,8 @@ public class Main extends javax.swing.JFrame{
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExecute)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -357,12 +376,10 @@ public class Main extends javax.swing.JFrame{
                 .addContainerGap()
                 .addComponent(PaneTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PaneMainLayout.createSequentialGroup()
-                        .addComponent(PaneUtama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 39, Short.MAX_VALUE))
+                .addGroup(PaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PaneUtama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PaneMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -450,6 +467,7 @@ public class Main extends javax.swing.JFrame{
     private javax.swing.JButton btnDeleteNode;
     private javax.swing.JButton btnDiameter;
     private javax.swing.JButton btnDisplayGraph;
+    private javax.swing.JButton btnExecute;
     private javax.swing.JToggleButton btnLoadGraph;
     private javax.swing.JButton btnViewEdge;
     private javax.swing.JButton btnViewNode;
@@ -458,11 +476,11 @@ public class Main extends javax.swing.JFrame{
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JMenuItem menuExit;
     private javax.swing.JMenuItem menuLoad;
     private javax.swing.JMenuItem menuSave;
+    private javax.swing.JTextArea txtInputQuery;
     private javax.swing.JTextArea txtPresent;
     // End of variables declaration//GEN-END:variables
 

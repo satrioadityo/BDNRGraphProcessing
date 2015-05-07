@@ -555,5 +555,145 @@ public class Controller implements ActionListener{
             System.exit(1);
             
         }
+        else if (e.equals(m.getBtnExecute())){
+            String query = m.getTxtInputQuery().getText();
+            query+="#"; // # = sentinel
+            if("#".equals(query)){
+                //kalo null
+                JOptionPane.showMessageDialog(m.getTxtInputQuery(), "Input query anda", 
+                        "Terjadi kesalahan", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                int i = 0;
+                String temp = "";
+                ArrayList<String> tempQuery = new ArrayList<String>();
+                while(query.charAt(i)!='#'){
+                    if (query.charAt(i) != ' ' && query.charAt(i)!= '*' && 
+                        query.charAt(i) != '.' && query.charAt(i)!= ',' &&
+                        query.charAt(i) != '=' && query.charAt(i)!= '(' && 
+                        query.charAt(i) != ')' && query.charAt(i)!= ';' && 
+                        query.charAt(i)!= '\"' && query.charAt(i)!= '<' && 
+                        query.charAt(i)!= '>') {
+                            temp += query.charAt(i);
+                    }
+                    else if(query.charAt(i) == ' '){
+                        tempQuery.add(temp);
+                        temp = "";
+                    }
+                    else if(query.charAt(i) == '*'){
+                        tempQuery.add(temp);
+                        temp = "*";
+                        tempQuery.add(temp);
+                        temp = "";
+                    }
+                    else if(query.charAt(i) == '.'){
+                        tempQuery.add(temp);
+                        temp = ".";
+                        tempQuery.add(temp);
+                        temp = "";
+                    }
+                    else if(query.charAt(i) == ','){
+                        tempQuery.add(temp);
+                        temp = ",";
+                        tempQuery.add(temp);
+                        temp = "";
+                    }
+                    else if(query.charAt(i) == '='){
+                        if(query.charAt(i+1)=='>' || query.charAt(i+1)=='<' ){
+                            JOptionPane.showMessageDialog(m.getTxtInputQuery(), "Input yang Anda masukkan salah!", "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        }else{
+                            tempQuery.add(temp);
+                            temp = "=";
+                            tempQuery.add(temp);
+                            temp = "";
+                        }
+                    }
+                    else if(query.charAt(i) == '('){
+                        tempQuery.add(temp);
+                        temp = "(";
+                        tempQuery.add(temp);
+                        temp = "";
+                    }
+                    else if(query.charAt(i) == ')'){
+                        tempQuery.add(temp);
+                        temp = ")";
+                        tempQuery.add(temp);
+                        temp = "";
+                    }
+                    else if(query.charAt(i) == ';'){
+                        tempQuery.add(temp);
+                        temp = ";";
+                        tempQuery.add(temp);
+                        temp = "";
+                    }
+                    else if(query.charAt(i) == '\"'){
+                        tempQuery.add(temp);
+                        temp = "";
+                        //cari tanda " kedua
+                        int i2 = 0;
+                        boolean search = true;
+                        int index2 = i+1;
+                        while (search && query.charAt(index2)!='#'){
+                            if (query.charAt(index2)=='\"'){
+                                i2 = index2;
+                                search = false;
+                            }
+                            index2++;
+                        }
+                        if(search){
+                            JOptionPane.showMessageDialog(m.getTxtInputQuery(), "Input Anda kurang tanda \"", "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        }
+                        for (int j = i; j<=i2;j++){
+                            temp += query.charAt(j);
+                        }
+                        i = i2;
+                    }
+                    else if(query.charAt(i) == '<'){
+                        tempQuery.add(temp);
+                        temp = "<";
+                        if(query.charAt(i+1)=='='){
+                            temp+="=";
+                            i++;
+                        }
+                        tempQuery.add(temp);
+                        temp = "";
+                    }
+                    else if(query.charAt(i) == '>'){
+                        tempQuery.add(temp);
+                        temp = ">";
+                        if(query.charAt(i+1)=='='){
+                            temp+="=";
+                            i++;
+                        }
+                        tempQuery.add(temp);
+                        temp = "";
+                    }
+                    else{
+                        tempQuery.add(temp);
+                        temp = "";
+                    }
+                    if(query.charAt(i+1) == '#'){
+                        tempQuery.add(temp);
+                        temp = "";
+                    }
+                    System.out.println(query.charAt(i));
+                    i++;
+                }
+                //melakukan minimasi arraylist
+                ArrayList<String> listWordQuery = new ArrayList<>();
+                //menelusuri list tempListWordSQL, mencari list yg tidak kosong
+                for (String s : tempQuery){
+                    if (!"".equals(s)){
+                        listWordQuery.add(s);
+                    }
+                } 
+                //output array list
+                for(String s : listWordQuery){
+                    System.out.println(s);
+                }
+            }
+        }
     }
 }
