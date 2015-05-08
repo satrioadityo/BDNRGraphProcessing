@@ -1002,10 +1002,53 @@ public class Controller implements ActionListener{
                 }
 
                 if(st.empty()){
-                    JOptionPane.showMessageDialog(m, "TOKEN SQL query VALID", "Validation", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(m, "TOKEN SQL query VALID", "Validation", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                    //kalau querynya valid, cek polanya, tampilkan hasilnya.
+                    if(listToken.get(3)==4){
+                        JOptionPane.showMessageDialog(m, "Pola where", "Pola", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                        //variable penampung list node hasil query
+                        ArrayList<Node> resultNode = new ArrayList<>();
+                        if (listWordQuery.size()==12){
+                            String[] value;
+                            for(Node n : m.getG().getEachNode()){
+                                if(n.hasAttribute(listWordQuery.get(6))){
+                                    String pembanding = "\"" + n.getAttribute(listWordQuery.get(6)) + "\"";
+                                    System.out.println(pembanding + " ?= "+ listWordQuery.get(8).toString());
+                                    if(pembanding.equals(listWordQuery.get(8).toString())){
+                                        resultNode.add(n);
+                                    }
+                                }
+                            } // end for
+                        }
+                        else{
+                            m.getTxtPresent().setText("no result");
+                        }
+                        // output the result
+                        String hasil = "";
+                        for(Node n : resultNode){
+                            hasil+="ID Node : "+n.getId()+"\n";
+                            
+                            for (Iterator<String> it = n.getAttributeKeyIterator(); it.hasNext();) {
+                                String s = it.next();
+                                hasil += s + " = " + n.getAttribute(s) + "\n";
+                            }
+                            m.getTxtPresent().setText(hasil);
+                        }
+                    }
+                    else if(listToken.get(3)==5){
+                        JOptionPane.showMessageDialog(m, "Pola fo", "Pola", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else if(listToken.get(3)==6){
+                        JOptionPane.showMessageDialog(m, "Pola fof", "Pola", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
                 else{
-                    JOptionPane.showMessageDialog(m, "TOKEN SQL query NOT VALID", "Validation", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(m, "TOKEN SQL query NOT VALID", "Validation", 
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
