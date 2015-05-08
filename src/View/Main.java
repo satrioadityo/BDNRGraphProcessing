@@ -229,12 +229,15 @@ public class Main extends javax.swing.JFrame{
         PaneUtama.setBackground(new java.awt.Color(0, 0, 0));
         PaneUtama.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255), 2));
 
+        txtPresent.setEditable(false);
         txtPresent.setColumns(20);
         txtPresent.setRows(5);
+        txtPresent.setToolTipText("Text Hasil");
         jScrollPane1.setViewportView(txtPresent);
 
         txtInputQuery.setColumns(20);
         txtInputQuery.setRows(5);
+        txtInputQuery.setToolTipText("Input your query here !");
         jScrollPane2.setViewportView(txtInputQuery);
 
         btnExecute.setText("Execute");
@@ -257,9 +260,9 @@ public class Main extends javax.swing.JFrame{
             PaneUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PaneUtamaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExecute)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
