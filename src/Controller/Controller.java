@@ -767,6 +767,9 @@ public class Controller implements ActionListener{
                     else if(isFAFOF(s)){
                         listToken.add(6);
                     }
+                    else if(isFAFOFOF(s)){
+                        listToken.add(14);
+                    }
                     else if(isFAReturn(s)){
                         listToken.add(12);
                     }
@@ -855,6 +858,13 @@ public class Controller implements ActionListener{
                                     st.pop();
                                     st.push("d"); st.push("c"); st.push("b"); st.push("f");
                                     System.out.println("pop O, push ebcf, stack = "+st);
+                                }
+                            }
+                            else if(simbolis[j] == 14){
+                                if(st.peek().toString()=="O"){
+                                    st.pop();
+                                    st.push("d"); st.push("c"); st.push("b"); st.push("n");
+                                    System.out.println("pop O, push ebcn, stack = "+st);
                                 }
                             }
                             else{
@@ -1050,6 +1060,18 @@ public class Controller implements ActionListener{
                                 System.out.println("current symbol bukan 13, tidak bisa pop m, query salah, stack tidak kosong");
                             }
                         break;
+                        case "n" :
+                            if(simbolis[j]==14){ // baca fofof
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop n , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 14, tidak bisa pop n, query salah, stack tidak kosong");
+                            }
+                        break;
                     }
                 } // end while, checking top stack
                 if(st.peek().toString()=="#"){
@@ -1202,9 +1224,74 @@ public class Controller implements ActionListener{
                             }
                         }
                     } // end of if listtoken 6
+                    else if(listToken.get(3)==14){
+//                        JOptionPane.showMessageDialog(m, "Pola fofof", "Pola", 
+//                            JOptionPane.INFORMATION_MESSAGE);
+                        ArrayList<Node> resultNode = new ArrayList<>();
+                        ArrayList<Node> temp1Node = new ArrayList<>();
+                        ArrayList<Node> temp2Node = new ArrayList<>();
+                        ArrayList<Node> temp3Node = new ArrayList<>();
+                        if (listWordQuery.size()==15){
+                            System.err.println("masuk");
+                            String[] value;
+                            for(Node n : m.getG().getEachNode()){
+                                if(n.hasAttribute(listWordQuery.get(9))){
+                                    System.err.println("ininin" + listWordQuery.get(9));
+                                    String pembanding = "\"" + n.getAttribute(listWordQuery.get(9)) + "\"";
+                                    System.out.println(pembanding + " ?= "+ listWordQuery.get(11).toString());
+                                    if(pembanding.equals(listWordQuery.get(11).toString())){
+                                        temp1Node.add(n); // 1 node pertama
+                                    }
+                                }
+                            } // end for
+                            for (Iterator<Node> it  = temp1Node.get(0).getNeighborNodeIterator(); it.hasNext();) {
+                                Node node = it.next();
+                                temp2Node.add(node); // list temannya node pertama
+                                System.err.println(node+"aaa");
+                            }
+                            for(Node n : temp2Node){
+                                for (Iterator<Node> it  = n.getNeighborNodeIterator(); it.hasNext();) {
+                                    Node node = it.next();
+                                    if(node!=temp1Node.get(0)){
+                                        temp3Node.add(node); // list temannya teman node pertama
+                                    }
+                                    System.out.println(node);
+                                }
+                            }
+                            for(Node n : temp3Node){
+                                for (Iterator<Node> it  = n.getNeighborNodeIterator(); it.hasNext();) {
+                                    Node node = it.next();
+                                    if(!temp2Node.contains(node)){
+                                        resultNode.add(node); // list  teman temannya teman node pertama
+                                    }
+                                    System.out.println(node);
+                                }
+                            }
+                            // output the result
+                            if (!listWordQuery.get(2).equals(listWordQuery.get(13)) ||
+                                    !listWordQuery.get(5).equals(listWordQuery.get(7)) ||
+                                    listWordQuery.get(2).equals(listWordQuery.get(5))){
+                                JOptionPane.showMessageDialog(m, "Cek kembali inputan anda !", "Error Variable", 
+                                    JOptionPane.ERROR_MESSAGE);
+                            }
+                            else{
+                                String hasil = "";
+                                for(Node n : resultNode){
+                                    hasil+="ID Node : "+n.getId()+"\n";
+
+                                    for (Iterator<String> it = n.getAttributeKeyIterator(); it.hasNext();) {
+                                        String s = it.next();
+                                        hasil += s + " = " + n.getAttribute(s) + "\n";
+                                    }
+                                    hasil+="\n";
+                                    m.getTxtPresent().setText(hasil);
+                                }
+                            }
+                        }
+                    } // end of if listtoken 14
                 }
                 else{
-                    JOptionPane.showMessageDialog(m, "TOKEN query is NOT VALID", "Validation", 
+                    JOptionPane.showMessageDialog(m, "Query is NOT VALID", "Validation", 
                             JOptionPane.ERROR_MESSAGE);
                     m.getTxtPresent().setText("no result");
                 }
@@ -1440,6 +1527,48 @@ public class Controller implements ActionListener{
             }
         }
         if(state == 3){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFAFOFOF(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='f'){
+                        state = 1;
+                    }
+                break;
+                case 1:
+                    if (s.charAt(i)=='o'){
+                        state = 2;
+                    }
+                break;
+                case 2:
+                    if (s.charAt(i)=='f'){
+                        state = 3;
+                    }
+                break;
+                case 3:
+                    if (s.charAt(i)=='o'){
+                        state = 4;
+                    }
+                break;
+                case 4:
+                    if (s.charAt(i)=='f'){
+                        state = 5;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 5){
             status = true;
         }
         else{
