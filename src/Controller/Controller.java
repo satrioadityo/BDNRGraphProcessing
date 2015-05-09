@@ -29,6 +29,7 @@ import org.graphstream.algorithm.BetweennessCentrality;
 import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.measure.ClosenessCentrality;
 import org.graphstream.graph.Node;
+import org.graphstream.graph.implementations.SingleNode;
 import org.graphstream.stream.file.FileSinkDGS;
 import org.graphstream.stream.file.FileSourceDGS;
 import org.graphstream.ui.swingViewer.View;
@@ -302,12 +303,12 @@ public class Controller implements ActionListener{
             bcb.init(m.getG());
             bcb.compute();
             for(Node n : m.getG().getEachNode()){
-                if ((Double)n.getAttribute("Cb")>200){
+                if ((Double)n.getAttribute("Cb")>40){
                     n.addAttribute("ui.class", "between");
                 }
                 System.out.println(n.getAttribute("name")+", "+n.getAttribute("Cb"));
             }
-//            m.getG().display();
+            m.getG().display();
         }
         else if (e.equals(m.getBtnCloseness())){
             // button closeness graph display in main performed
@@ -315,22 +316,23 @@ public class Controller implements ActionListener{
             cc.init(m.getG());
             cc.compute();
             for(Node n : m.getG().getEachNode()){
-                if ("Infinity".equals(n.getAttribute("Cc").toString())){
-                    n.setAttribute("Cc", 0);
-                }
+//                if ("Infinity".equalsIgnoreCase(n.getAttribute("Cc").toString())){
+//                    n.setAttribute("Cc", -1);
+//                }
                 System.err.println(n.getId()+", "+n.getAttribute("Cc").toString());
             }
             Double maxCc = m.getG().getNode("1").getAttribute("Cc");
-            Node temp = null;
+            Node temp = m.getG().getNode("1");
             for(Node n : m.getG().getEachNode()){
-                if (Double.parseDouble(n.getAttribute("Cc"))>maxCc){
+                if (Double.parseDouble(n.getAttribute("Cc").toString())>maxCc){
                     temp = n;
                 }
-                System.out.println(n.getId()+", "+n.getAttribute("Cc").toString());
+                System.out.println(n.getId()+" "+n.getAttribute("Cc").toString());
             }
+            // node dgn closeness terbesar set classnya jd closeness
             temp.addAttribute("ui.class", "closeness");
-//            System.out.println(temp.getAttribute("name")+", "+temp.getAttribute("Cc"));
-//            m.getG().display();
+            System.out.println(temp.getAttribute("name")+", "+temp.getAttribute("Cc"));
+            m.getG().display();
         }
         else if (e.equals(m.getBtnColoringNode())){
             // button coloring node graph display in main performed
@@ -408,7 +410,7 @@ public class Controller implements ActionListener{
                 " size: 20px;"+
                 "}"+
                 "node.closeness {"+
-                " fill-color: black;"+
+                " fill-color: yellow;"+
                 " size: 20px;"+
                 "}"+
                 "node.PersoninDegree0 {"+
@@ -474,21 +476,58 @@ public class Controller implements ActionListener{
                 "}";
             
             m.getG().addAttribute("ui.stylesheet", styleSheet);
+//            m.getG().display().disableAutoLayout();
+//            double x=0, y=0;
+//            double a=100, b=10;
+//            for(Node n : m.getG()){
+//                
+//                if (n.hasAttribute("tweet")){
+//                    n.setAttribute("xy", x,y);
+//                    x=x+10;
+//                    if(x % 50==0){
+//                        x=0;
+//                        y=y+10;
+//                    }
+//                }else{
+//                    n.setAttribute("xy", a,b);
+//                    a=a+10;
+//                    if(a % 150==0){
+//                        a=100;
+//                        b=b+10;
+//                    }
+//                }
             
+
             m.getG().display();
-        }
+    }   
+    
         else if (e.equals(m.getBtnCluster())){
             // button cluster node graph display in main performed
+            double x=0, y=0;
+            double a=100, b=10;
             for(Node n : m.getG().getEachNode()){
                 if(n.hasAttribute("name")){
                     System.out.println(n.getId()+", "+n.getAttribute("name"));
                     n.addAttribute("ui.class", "Person");
+                    n.setAttribute("xy", a,b);
+                    a=a+10;
+                    if(a % 150==0){
+                        a=100;
+                        b=b+10;
+                    }
                 }
                 else if(n.hasAttribute("tweet")){
                     System.out.println(n.getId()+", "+n.getAttribute("tweet"));
                     n.addAttribute("ui.class", "Tweet");
+                    n.setAttribute("xy", x,y);
+                    x=x+10;
+                    if(x % 50==0){
+                        x=0;
+                        y=y+10;
+                    }
                 }
             }
+            m.getG().display(false);
         }
 //        else if (e.equals(m.getBtnSaveGraph())){
 //            FileSinkDGS fsdgs = new FileSinkDGS();
