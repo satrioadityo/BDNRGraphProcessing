@@ -32,7 +32,6 @@ import org.graphstream.algorithm.BetweennessCentrality;
 import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.measure.ClosenessCentrality;
 import org.graphstream.graph.Node;
-import org.graphstream.graph.implementations.SingleNode;
 import org.graphstream.stream.file.FileSinkDGS;
 import org.graphstream.stream.file.FileSourceDGS;
 import org.graphstream.ui.swingViewer.View;
@@ -56,7 +55,7 @@ public class Controller implements ActionListener{
     Viewer viewer;
     View view;
 
-    public Controller() throws ClassNotFoundException {
+    public Controller(){
         m = new Main();
         anv = new AddNodeView();
         aev = new AddEdgeView();
@@ -68,6 +67,8 @@ public class Controller implements ActionListener{
         vev = new ViewEdgeView();
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
@@ -156,17 +157,22 @@ public class Controller implements ActionListener{
         }
         else if (e.equals(aev.getBtnAdd())){
             // button add edge in add view edge performed
-            String name = aev.getTxtName().getText();
+            String id = aev.getTxtID().getText();
+            String label = aev.getTxtLabel().getText();
             String source = aev.getTxtSource().getText();
             String dest = aev.getTxtDest().getText();
             try {
-                if (!"".equals(aev.getTxtName().getText()) && !"".equals(aev.getTxtSource().getText())
+                if (!"".equals(aev.getTxtID().getText()) 
+                        && !"".equals(aev.getTxtLabel().getText()) 
+                        && !"".equals(aev.getTxtSource().getText())
                         && !"".equals(aev.getTxtDest().getText())){
-                    m.getG().addEdge(name, source, dest);
+                    m.getG().addEdge(id, source, dest);
+                    m.getG().getEdge(id).setAttribute("ui.label", label);
                     JOptionPane.showMessageDialog(aev, "Edge berhasil ditambahkan", "Success", 
                             JOptionPane.INFORMATION_MESSAGE);
                     aev.setVisible(false);
-                    aev.getTxtName().setText("");
+                    aev.getTxtID().setText("");
+                    aev.getTxtLabel().setText("");
                     aev.getTxtSource().setText("");
                     aev.getTxtDest().setText("");
                 }

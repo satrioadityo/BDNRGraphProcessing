@@ -6,11 +6,6 @@
 
 package Controller;
 
-import View.AddNodeView;
-import View.Main;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Ima
@@ -22,11 +17,7 @@ public class Driver {
      */
     
     public static void main(String[] args) {
-        try {
-            Controller c = new Controller();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Driver.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Controller c = new Controller();
     }
     
 }
