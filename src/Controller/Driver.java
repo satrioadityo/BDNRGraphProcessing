@@ -8,6 +8,8 @@ package Controller;
 
 import View.AddNodeView;
 import View.Main;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +22,11 @@ public class Driver {
      */
     
     public static void main(String[] args) {
-        Controller c = new Controller();
+        try {
+            Controller c = new Controller();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Driver.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
