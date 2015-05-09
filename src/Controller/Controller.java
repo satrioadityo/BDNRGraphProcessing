@@ -1058,7 +1058,7 @@ public class Controller implements ActionListener{
                 }
 
                 if(st.empty()){
-                    JOptionPane.showMessageDialog(m, "TOKEN SQL query VALID", "Validation", 
+                    JOptionPane.showMessageDialog(m, "Query is VALID", "Validation", 
                             JOptionPane.INFORMATION_MESSAGE);
                     //kalau querynya valid, cek polanya, tampilkan hasilnya.
                     if(listToken.get(3)==4){
@@ -1078,11 +1078,10 @@ public class Controller implements ActionListener{
                                 }
                             } // end for
                         }
-                        else{
-                            m.getTxtPresent().setText("no result");
-                        }
                         // output the result
-                        if (listToken.get(2)!=listToken.get(4) && listToken.get(2)!=listToken.get(10)){
+                        if (!listWordQuery.get(2).equals(listWordQuery.get(4)) ||
+                                !listWordQuery.get(2).equals(listWordQuery.get(10)) ||
+                                !listWordQuery.get(4).equals(listWordQuery.get(10))){
                             JOptionPane.showMessageDialog(m, "Cek kembali inputan anda !", "Error Variable", 
                                 JOptionPane.ERROR_MESSAGE);
                         }
@@ -1126,7 +1125,9 @@ public class Controller implements ActionListener{
                             }
                             
                             // output the result
-                            if (listToken.get(2)!=listToken.get(13) && listToken.get(5)!=listToken.get(7)){
+                            if (!listWordQuery.get(2).equals(listWordQuery.get(13)) ||
+                                    !listWordQuery.get(5).equals(listWordQuery.get(7)) ||
+                                    listWordQuery.get(2).equals(listWordQuery.get(5))){
                                 JOptionPane.showMessageDialog(m, "Cek kembali inputan anda !", "Error Variable", 
                                     JOptionPane.ERROR_MESSAGE);
                             }
@@ -1144,13 +1145,10 @@ public class Controller implements ActionListener{
                                 }
                             }
                         }
-                        else{
-                            System.out.println(listWordQuery.get(14));
-                        }
                     }
                     else if(listToken.get(3)==6){
-                        JOptionPane.showMessageDialog(m, "Pola fof", "Pola", 
-                            JOptionPane.INFORMATION_MESSAGE);
+//                        JOptionPane.showMessageDialog(m, "Pola fof", "Pola", 
+//                            JOptionPane.INFORMATION_MESSAGE);
                         ArrayList<Node> resultNode = new ArrayList<>();
                         ArrayList<Node> temp1Node = new ArrayList<>();
                         ArrayList<Node> temp2Node = new ArrayList<>();
@@ -1183,7 +1181,9 @@ public class Controller implements ActionListener{
                             }
                             
                             // output the result
-                            if (listToken.get(2)!=listToken.get(13) && listToken.get(5)!=listToken.get(7)){
+                            if (!listWordQuery.get(2).equals(listWordQuery.get(13)) ||
+                                    !listWordQuery.get(5).equals(listWordQuery.get(7)) ||
+                                    listWordQuery.get(2).equals(listWordQuery.get(5))){
                                 JOptionPane.showMessageDialog(m, "Cek kembali inputan anda !", "Error Variable", 
                                     JOptionPane.ERROR_MESSAGE);
                             }
@@ -1204,8 +1204,9 @@ public class Controller implements ActionListener{
                     } // end of if listtoken 6
                 }
                 else{
-                    JOptionPane.showMessageDialog(m, "TOKEN SQL query NOT VALID", "Validation", 
+                    JOptionPane.showMessageDialog(m, "TOKEN query is NOT VALID", "Validation", 
                             JOptionPane.ERROR_MESSAGE);
+                    m.getTxtPresent().setText("no result");
                 }
             }
         }
