@@ -22,9 +22,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import org.graphstream.algorithm.BetweennessCentrality;
 import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.measure.ClosenessCentrality;
@@ -53,7 +56,7 @@ public class Controller implements ActionListener{
     Viewer viewer;
     View view;
 
-    public Controller() {
+    public Controller() throws ClassNotFoundException {
         m = new Main();
         anv = new AddNodeView();
         aev = new AddEdgeView();
@@ -63,6 +66,15 @@ public class Controller implements ActionListener{
         dav = new DeleteAttributeView();
         vnv = new ViewNodeView();
         vev = new ViewEdgeView();
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
 //        viewer = new Viewer(m.getG(), Viewer.ThreadingModel.GRAPH_IN_SWING_THREAD);
         
@@ -595,7 +607,7 @@ public class Controller implements ActionListener{
             
         }
         else if (e.equals(m.getBtnExecute())){
-            String query = m.getTxtInputQuery().getText();
+            String query = m.getTxtInputQuery().getText(); // dapatkan query inputan user
             query+="#"; // # = sentinel
             if("#".equals(query)){
                 //kalo null
@@ -603,8 +615,8 @@ public class Controller implements ActionListener{
                         "Terjadi kesalahan", JOptionPane.ERROR_MESSAGE);
             }
             else{
-                int i = 0;
-                String temp = "";
+                int i = 0; //untuk mengiterasi setiap character dalam query
+                String temp = ""; //untuk menampung sementara tiap kata dalam query
                 ArrayList<String> tempQuery = new ArrayList<String>();
                 while(query.charAt(i)!='#'){
                     if (query.charAt(i) != ' ' && query.charAt(i)!= '*' && 
@@ -639,7 +651,8 @@ public class Controller implements ActionListener{
                     }
                     else if(query.charAt(i) == '='){
                         if(query.charAt(i+1)=='>' || query.charAt(i+1)=='<' ){
-                            JOptionPane.showMessageDialog(m.getTxtInputQuery(), "Input yang Anda masukkan salah!", "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(m.getTxtInputQuery(), "Input yang Anda masukkan salah!", 
+                                    "Terjadi Kesalahan!", JOptionPane.ERROR_MESSAGE);
                             break;
                         }else{
                             tempQuery.add(temp);
@@ -719,20 +732,941 @@ public class Controller implements ActionListener{
                     }
                     System.out.println(query.charAt(i));
                     i++;
-                }
+                } // end of while
+                
                 //melakukan minimasi arraylist
                 ArrayList<String> listWordQuery = new ArrayList<>();
-                //menelusuri list tempListWordSQL, mencari list yg tidak kosong
+                //menelusuri list tempQuery, mencari list yg tidak kosong
                 for (String s : tempQuery){
                     if (!"".equals(s)){
                         listWordQuery.add(s);
                     }
                 } 
-                //output array list
+                
+                ArrayList<Integer> listToken = new ArrayList<>();
+                //conversi dari listwordquery ke token lexic
                 for(String s : listWordQuery){
+                    if (isFAFind(s)){
+                        listToken.add(1);
+                    }
+                    else if(isFANode(s)){
+                        listToken.add(2);
+                    }
+                    else if(isFAWhere(s)){
+                        listToken.add(4);
+                    }
+                    else if(isFAFO(s)){
+                        listToken.add(5);
+                    }
+                    else if(isFAFOF(s)){
+                        listToken.add(6);
+                    }
+                    else if(isFAReturn(s)){
+                        listToken.add(12);
+                    }
+                    else if(isFATitik(s)){
+                        listToken.add(7);
+                    }
+                    else if(isFASamaDengan(s)){
+                        listToken.add(9);
+                    }
+                    else if(isFATitikKoma(s)){
+                        listToken.add(13);
+                    }
+                    else if(isFAAND(s)){
+                        listToken.add(11);
+                    }
+                    else if(isFAOR(s)){
+                        listToken.add(11);
+                    }
+                    else if(isFAString(s)){
+                        listToken.add(10);
+                    }
+                    else if(isFANumber(s)){
+                        listToken.add(10);
+                    }
+                    else if(isFAVariable(s)){
+                        if(listToken.get(listToken.size()-1)==7){
+                            listToken.add(8);
+                            System.err.println("yes");
+                        }
+                        else{
+                            listToken.add(3);
+                            System.err.println("no");
+                        }
+                    }
                     System.out.println(s);
+                } // end for conversi
+                String token = "";
+                int[] simbolis = new int[listToken.size()+1];
+                int j = 0;
+                for(int n : listToken){
+                    token+=n+" ";
+                    m.getTxtPresent().setText(token);
+                    simbolis[j++] = n;
+                }
+                simbolis[j] = 999; //sentinel
+                // proses iterasi list token untuk validasi query
+                
+                boolean stop = false;
+                j = 0;
+                Stack st = new Stack();
+                int state = 0; st.push("#"); state = 1; st.push("S");
+                while(st.peek().toString()!="#" && !stop){
+                    switch(st.peek().toString()){
+                        case "S" :
+                            if(simbolis[j]==1){
+                                if(st.peek().toString()=="S"){
+                                    st.pop();
+                                    st.push("m"); st.push("c"); st.push("P"); st.push("j");
+                                    st.push("i"); st.push("h"); st.push("g"); st.push("c");
+                                    st.push("O"); st.push("c"); st.push("b"); st.push("a");
+                                    System.out.println("pop S , push abcOcghijPcm, stack = "+st);
+                                }
+                            }
+                            else{
+                                stop = true;
+                            }
+                        break;
+                        case "O" :
+                            if(simbolis[j] == 4){
+                                if(st.peek().toString()=="O"){
+                                    st.pop();
+                                    st.push("d");
+                                    System.out.println("pop O, push d");
+                                    System.out.println(st);
+                                }
+                            }
+                            else if(simbolis[j] == 5){
+                                if(st.peek().toString()=="O"){
+                                    st.pop();
+                                    st.push("d"); st.push("c"); st.push("b"); st.push("e");
+                                    System.out.println("pop O, push ebcd, stack = "+st);
+                                }
+                            }
+                            else if(simbolis[j] == 6){
+                                if(st.peek().toString()=="O"){
+                                    st.pop();
+                                    st.push("d"); st.push("c"); st.push("b"); st.push("f");
+                                    System.out.println("pop O, push ebcf, stack = "+st);
+                                }
+                            }
+                            else{
+                                stop = true;
+                            }
+                        break;
+                        case "P" :
+                            if(simbolis[j] == 11){
+                                if(st.peek().toString()=="P"){
+                                    st.pop();
+                                    st.push("A"); st.push("k");
+                                    System.out.println("pop P, push kA");
+                                    System.out.println(st);
+                                }
+                            }
+                            else if(simbolis[j] == 12){
+                                if(st.peek().toString()=="P"){
+                                    st.pop();
+                                    st.push("l");
+                                    System.out.println("pop P, push l, stack = "+st);
+                                }
+                            }
+                            else{
+                                stop = true;
+                            }
+                        break;
+                        case "A" :
+                            if(simbolis[j] == 3){
+                                if(st.peek().toString()=="A"){
+                                    st.pop();
+                                    st.push("l"); st.push("j"); st.push("i"); st.push("h"); st.push("g"); st.push("c");
+                                    System.out.println("pop A, push cgihjl");
+                                    System.out.println(st);
+                                }
+                            }
+                            else{
+                                stop = true;
+                            }
+                        break;
+                        case "a" :
+                            if(simbolis[j]==1){ //baca find
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop a , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 1, tidak bisa pop a, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "b" :
+                            if(simbolis[j]==2){ //baca node
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop b , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 2, tidak bisa pop b, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "c" :
+                            if(simbolis[j]==3){ //baca variable
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop c , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 3, tidak bisa pop c, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "d" :
+                            if(simbolis[j]==4){ // baca where
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop d , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 4, tidak bisa pop d, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "e" :
+                            if(simbolis[j]==5){ // baca friend of
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop e , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 5, tidak bisa pop e, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "f" :
+                            if(simbolis[j]==6){ // baca friend of friend
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop f , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 6, tidak bisa pop f, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "g" :
+                            if(simbolis[j]==7){ // baca .
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop g , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 7, tidak bisa pop g, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "h" :
+                            if(simbolis[j]==8){ // baca atribut
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop h , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 8, tidak bisa pop h, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "i" :
+                            if(simbolis[j]==9){ // baca =
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop i , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 9, tidak bisa pop i, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "j" :
+                            if(simbolis[j]==10){ // baca constanta
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop j , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 10, tidak bisa pop j, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "k" :
+                            if(simbolis[j]==11){ // baca constanta
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop k , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 11, tidak bisa pop k, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "l" :
+                            if(simbolis[j]==12){ // baca constanta
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop l , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 12, tidak bisa pop l, query salah, stack tidak kosong");
+                            }
+                        break;
+                        case "m" :
+                            if(simbolis[j]==13){ // baca constanta
+                                st.pop();
+                                j=j+1;
+                                System.out.println("pop m , current symbol =  "+simbolis[j]);
+                                System.out.println(st);
+                            }
+                            else {
+                                stop = true;
+                                System.out.println("current symbol bukan 13, tidak bisa pop m, query salah, stack tidak kosong");
+                            }
+                        break;
+                    }
+                } // end while, checking top stack
+                if(st.peek().toString()=="#"){
+                    st.pop();
+                    System.out.println(st);
+                }
+
+                if(st.empty()){
+                    JOptionPane.showMessageDialog(m, "TOKEN SQL query VALID", "Validation", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                    //kalau querynya valid, cek polanya, tampilkan hasilnya.
+                    if(listToken.get(3)==4){
+//                        JOptionPane.showMessageDialog(m, "Pola where", "Pola", 
+//                            JOptionPane.INFORMATION_MESSAGE);
+                        //variable penampung list node hasil query
+                        ArrayList<Node> resultNode = new ArrayList<>();
+                        if (listWordQuery.size()==12){
+                            String[] value;
+                            for(Node n : m.getG().getEachNode()){
+                                if(n.hasAttribute(listWordQuery.get(6))){
+                                    String pembanding = "\"" + n.getAttribute(listWordQuery.get(6)) + "\"";
+                                    System.out.println(pembanding + " ?= "+ listWordQuery.get(8).toString());
+                                    if(pembanding.equals(listWordQuery.get(8).toString())){
+                                        resultNode.add(n);
+                                    }
+                                }
+                            } // end for
+                        }
+                        else{
+                            m.getTxtPresent().setText("no result");
+                        }
+                        // output the result
+                        if (listToken.get(2)!=listToken.get(4) && listToken.get(2)!=listToken.get(10)){
+                            JOptionPane.showMessageDialog(m, "Cek kembali inputan anda !", "Error Variable", 
+                                JOptionPane.ERROR_MESSAGE);
+                        }
+                        else{
+                            String hasil = "";
+                            for(Node n : resultNode){
+                                hasil+="ID Node : "+n.getId()+"\n";
+
+                                for (Iterator<String> it = n.getAttributeKeyIterator(); it.hasNext();) {
+                                    String s = it.next();
+                                    hasil += s + " = " + n.getAttribute(s) + "\n";
+                                }
+                                hasil+="\n";
+                                m.getTxtPresent().setText(hasil);
+                            }
+                        }
+                    }
+                    else if(listToken.get(3)==5){
+//                        JOptionPane.showMessageDialog(m, "Pola fo", "Pola", 
+//                            JOptionPane.INFORMATION_MESSAGE);
+                        //variable penampung list node hasil query
+                        ArrayList<Node> resultNode = new ArrayList<>();
+                        ArrayList<Node> tempNode = new ArrayList<>();
+                        if (listWordQuery.size()==15){
+                            System.err.println("masuk");
+                            String[] value;
+                            for(Node n : m.getG().getEachNode()){
+                                if(n.hasAttribute(listWordQuery.get(9))){
+                                    System.err.println("ininin" + listWordQuery.get(9));
+                                    String pembanding = "\"" + n.getAttribute(listWordQuery.get(9)) + "\"";
+                                    System.out.println(pembanding + " ?= "+ listWordQuery.get(11).toString());
+                                    if(pembanding.equals(listWordQuery.get(11).toString())){
+                                        tempNode.add(n); //pointer pertama
+                                    }
+                                }
+                            } // end for
+                            for (Iterator<Node> it  = tempNode.get(0).getNeighborNodeIterator(); it.hasNext();) {
+                                Node node = it.next();
+                                resultNode.add(node);
+                                System.out.println(node);
+                            }
+                            
+                            // output the result
+                            if (listToken.get(2)!=listToken.get(13) && listToken.get(5)!=listToken.get(7)){
+                                JOptionPane.showMessageDialog(m, "Cek kembali inputan anda !", "Error Variable", 
+                                    JOptionPane.ERROR_MESSAGE);
+                            }
+                            else{
+                                String hasil = "";
+                                for(Node n : resultNode){
+                                    hasil+="ID Node : "+n.getId()+"\n";
+
+                                    for (Iterator<String> it = n.getAttributeKeyIterator(); it.hasNext();) {
+                                        String s = it.next();
+                                        hasil += s + " = " + n.getAttribute(s) + "\n";
+                                    }
+                                    hasil+="\n";
+                                    m.getTxtPresent().setText(hasil);
+                                }
+                            }
+                        }
+                        else{
+                            System.out.println(listWordQuery.get(14));
+                        }
+                    }
+                    else if(listToken.get(3)==6){
+                        JOptionPane.showMessageDialog(m, "Pola fof", "Pola", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                        ArrayList<Node> resultNode = new ArrayList<>();
+                        ArrayList<Node> temp1Node = new ArrayList<>();
+                        ArrayList<Node> temp2Node = new ArrayList<>();
+                        if (listWordQuery.size()==15){
+                            System.err.println("masuk");
+                            String[] value;
+                            for(Node n : m.getG().getEachNode()){
+                                if(n.hasAttribute(listWordQuery.get(9))){
+                                    System.err.println("ininin" + listWordQuery.get(9));
+                                    String pembanding = "\"" + n.getAttribute(listWordQuery.get(9)) + "\"";
+                                    System.out.println(pembanding + " ?= "+ listWordQuery.get(11).toString());
+                                    if(pembanding.equals(listWordQuery.get(11).toString())){
+                                        temp1Node.add(n); //pointer pertama
+                                    }
+                                }
+                            } // end for
+                            for (Iterator<Node> it  = temp1Node.get(0).getNeighborNodeIterator(); it.hasNext();) {
+                                Node node = it.next();
+                                temp2Node.add(node); // temannya pointer pertama
+                                System.err.println(node+"aaa");
+                            }
+                            for(Node n : temp2Node){
+                                for (Iterator<Node> it  = n.getNeighborNodeIterator(); it.hasNext();) {
+                                    Node node = it.next();
+                                    if(node!=temp1Node.get(0)){
+                                        resultNode.add(node); // temannya teman pointer pertama
+                                    }
+                                    System.out.println(node);
+                                }
+                            }
+                            
+                            // output the result
+                            if (listToken.get(2)!=listToken.get(13) && listToken.get(5)!=listToken.get(7)){
+                                JOptionPane.showMessageDialog(m, "Cek kembali inputan anda !", "Error Variable", 
+                                    JOptionPane.ERROR_MESSAGE);
+                            }
+                            else{
+                                String hasil = "";
+                                for(Node n : resultNode){
+                                    hasil+="ID Node : "+n.getId()+"\n";
+
+                                    for (Iterator<String> it = n.getAttributeKeyIterator(); it.hasNext();) {
+                                        String s = it.next();
+                                        hasil += s + " = " + n.getAttribute(s) + "\n";
+                                    }
+                                    hasil+="\n";
+                                    m.getTxtPresent().setText(hasil);
+                                }
+                            }
+                        }
+                    } // end of if listtoken 6
+                }
+                else{
+                    JOptionPane.showMessageDialog(m, "TOKEN SQL query NOT VALID", "Validation", 
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
+    }
+    public boolean isFANumber(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='0' || s.charAt(i)=='1' || s.charAt(i)=='2' || 
+                        s.charAt(i)=='3' || s.charAt(i)=='4' || s.charAt(i)=='5' ||
+                        s.charAt(i)=='6' || s.charAt(i)=='7' || s.charAt(i)=='8' || 
+                        s.charAt(i)=='9'){
+                        state = 1;
+                    }
+                    else{
+                        state = 2;
+                    }
+                break;
+                case 1:
+                    if (s.charAt(i)=='0' || s.charAt(i)=='1' || s.charAt(i)=='2' || 
+                        s.charAt(i)=='3' || s.charAt(i)=='4' || s.charAt(i)=='5' || 
+                        s.charAt(i)=='6' || s.charAt(i)=='7' || s.charAt(i)=='8' || 
+                        s.charAt(i)=='9' || s.charAt(i)=='9'){
+                        state = 1;
+                    }
+                    else{
+                        state = 2;
+                    }
+                break;
+                default:
+                    state = 2;
+            }
+        }
+        if(state == 1){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    
+    public boolean isFAVariable(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)!='0' && s.charAt(i)!='1' && s.charAt(i)!='2' && 
+                        s.charAt(i)!='3' && s.charAt(i)!='4' && s.charAt(i)!='5' && 
+                        s.charAt(i)!='6' && s.charAt(i)!='7' && s.charAt(i)!='8' && 
+                        s.charAt(i)!='9' && s.charAt(i)!='!' && s.charAt(i)!='@' &&
+                        s.charAt(i)!='#' && s.charAt(i)!='$' && s.charAt(i)!='%' &&
+                        s.charAt(i)!='^' && s.charAt(i)!='&' && s.charAt(i)!='*' &&
+                        s.charAt(i)!='(' && s.charAt(i)!=')' && s.charAt(i)!='-' &&
+                        s.charAt(i)!='_' && s.charAt(i)!='+' && s.charAt(i)!='=' )
+                    {
+                        state = 1;
+                    }
+                    else{
+                        state = 3;
+                    }
+                break;
+                case 1:
+                    if (s.charAt(i)=='0' || s.charAt(i)=='1' || s.charAt(i)=='2' || 
+                        s.charAt(i)=='3' || s.charAt(i)=='4' || s.charAt(i)=='5' || 
+                        s.charAt(i)=='6' || s.charAt(i)=='7' || s.charAt(i)=='8' || 
+                        s.charAt(i)=='9'){
+                        state = 1;
+                    }
+                    else{
+                        state = 1;
+                    }
+                break;
+                default:
+                    state = 3;
+            }
+        }
+        if(state == 0 || state == 1){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFAString(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='\"'){
+                        state = 1;
+                    }
+                break;
+                case 1:
+                    if (s.charAt(i)!='\"'){
+                        state = 2;
+                    }
+                break;
+                case 2:
+                    if (s.charAt(i)=='\"'){
+                        state = 3;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 3){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFAAND(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='a'){
+                        state = 1;
+                    }
+                break;
+                case 1:
+                    if (s.charAt(i)=='n'){
+                        state = 2;
+                    }
+                break;
+                case 2:
+                    if (s.charAt(i)=='d'){
+                        state = 3;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 3){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    
+    //fungsi untuk mengecek apakah string itu or
+    public boolean isFAOR(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='o'){
+                        state = 1;
+                    }
+                break;
+                case 1:
+                    if (s.charAt(i)=='r'){
+                        state = 2;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 2){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFAFO(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='f'){
+                        state = 1;
+                    }
+                break;
+                case 1:
+                    if (s.charAt(i)=='o'){
+                        state = 2;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 2){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFAFOF(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='f'){
+                        state = 1;
+                    }
+                break;
+                case 1:
+                    if (s.charAt(i)=='o'){
+                        state = 2;
+                    }
+                break;
+                case 2:
+                    if (s.charAt(i)=='f'){
+                        state = 3;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 3){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFATitikKoma(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)==';'){
+                        state = 1;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 1){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFASamaDengan(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='='){
+                        state = 1;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 1){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFATitik(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='.'){
+                        state = 1;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 1){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFAReturn(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='r'){
+                        state = 1;
+                    }
+                break;
+                case 1:
+                    if(s.charAt(i)=='e'){
+                        state = 2;
+                    }
+                break;
+                case 2:
+                    if(s.charAt(i)=='t'){
+                        state = 3;
+                    }
+                break;
+                case 3:
+                    if(s.charAt(i)=='u'){
+                        state = 4;
+                    }
+                break;
+                case 4:
+                    if(s.charAt(i)=='r'){
+                        state = 5;
+                    }
+                break;
+                case 5:
+                    if(s.charAt(i)=='n'){
+                        state = 6;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 6){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFAFind(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='f'){
+                        state = 1;
+                    }
+                break;
+                case 1:
+                    if(s.charAt(i)=='i'){
+                        state = 2;
+                    }
+                break;
+                case 2:
+                    if(s.charAt(i)=='n'){
+                        state = 3;
+                    }
+                break;
+                case 3:
+                    if(s.charAt(i)=='d'){
+                        state = 4;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 4){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFANode(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='n'){
+                        state = 1;
+                    }
+                break;
+                case 1:
+                    if(s.charAt(i)=='o'){
+                        state = 2;
+                    }
+                break;
+                case 2:
+                    if(s.charAt(i)=='d'){
+                        state = 3;
+                    }
+                break;
+                case 3:
+                    if(s.charAt(i)=='e'){
+                        state = 4;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 4){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
+    }
+    public boolean isFAWhere(String s){
+        int state = 0;
+        boolean status = false;
+        for (int i = 0; i<s.length(); i++){
+            switch (state) {
+                case 0:
+                    if (s.charAt(i)=='w'){
+                        state = 1;
+                    }
+                break;
+                case 1:
+                    if(s.charAt(i)=='h'){
+                        state = 2;
+                    }
+                break;
+                case 2:
+                    if(s.charAt(i)=='e'){
+                        state = 3;
+                    }
+                break;
+                case 3:
+                    if(s.charAt(i)=='r'){
+                        state = 4;
+                    }
+                break;
+                case 4:
+                    if(s.charAt(i)=='e'){
+                        state = 5;
+                    }
+                break;
+                default:
+                    state = 0;
+            }
+        }
+        if(state == 5){
+            status = true;
+        }
+        else{
+            status = false;
+        }
+        return status;
     }
 }
