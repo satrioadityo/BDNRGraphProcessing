@@ -26,6 +26,8 @@ import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import org.graphstream.algorithm.BetweennessCentrality;
 import org.graphstream.algorithm.Toolkit;
 import org.graphstream.algorithm.measure.ClosenessCentrality;
@@ -53,7 +55,7 @@ public class Controller implements ActionListener{
     Viewer viewer;
     View view;
 
-    public Controller() {
+    public Controller() throws ClassNotFoundException {
         m = new Main();
         anv = new AddNodeView();
         aev = new AddEdgeView();
@@ -63,6 +65,15 @@ public class Controller implements ActionListener{
         dav = new DeleteAttributeView();
         vnv = new ViewNodeView();
         vev = new ViewEdgeView();
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
 //        viewer = new Viewer(m.getG(), Viewer.ThreadingModel.GRAPH_IN_SWING_THREAD);
         
@@ -557,7 +568,7 @@ public class Controller implements ActionListener{
             
         }
         else if (e.equals(m.getBtnExecute())){
-            String query = m.getTxtInputQuery().getText();
+            String query = m.getTxtInputQuery().getText(); // dapatkan query inputan user
             query+="#"; // # = sentinel
             if("#".equals(query)){
                 //kalo null
@@ -565,8 +576,8 @@ public class Controller implements ActionListener{
                         "Terjadi kesalahan", JOptionPane.ERROR_MESSAGE);
             }
             else{
-                int i = 0;
-                String temp = "";
+                int i = 0; //untuk mengiterasi setiap character dalam query
+                String temp = ""; //untuk menampung sementara tiap kata dalam query
                 ArrayList<String> tempQuery = new ArrayList<String>();
                 while(query.charAt(i)!='#'){
                     if (query.charAt(i) != ' ' && query.charAt(i)!= '*' && 
@@ -682,10 +693,11 @@ public class Controller implements ActionListener{
                     }
                     System.out.println(query.charAt(i));
                     i++;
-                }
+                } // end of while
+                
                 //melakukan minimasi arraylist
                 ArrayList<String> listWordQuery = new ArrayList<>();
-                //menelusuri list tempListWordSQL, mencari list yg tidak kosong
+                //menelusuri list tempQuery, mencari list yg tidak kosong
                 for (String s : tempQuery){
                     if (!"".equals(s)){
                         listWordQuery.add(s);
@@ -743,10 +755,9 @@ public class Controller implements ActionListener{
                             listToken.add(3);
                             System.err.println("no");
                         }
-                        
                     }
                     System.out.println(s);
-                }
+                } // end for conversi
                 String token = "";
                 int[] simbolis = new int[listToken.size()+1];
                 int j = 0;
@@ -995,7 +1006,7 @@ public class Controller implements ActionListener{
                             }
                         break;
                     }
-                }
+                } // end while, checking top stack
                 if(st.peek().toString()=="#"){
                     st.pop();
                     System.out.println(st);
@@ -1006,8 +1017,8 @@ public class Controller implements ActionListener{
                             JOptionPane.INFORMATION_MESSAGE);
                     //kalau querynya valid, cek polanya, tampilkan hasilnya.
                     if(listToken.get(3)==4){
-                        JOptionPane.showMessageDialog(m, "Pola where", "Pola", 
-                            JOptionPane.INFORMATION_MESSAGE);
+//                        JOptionPane.showMessageDialog(m, "Pola where", "Pola", 
+//                            JOptionPane.INFORMATION_MESSAGE);
                         //variable penampung list node hasil query
                         ArrayList<Node> resultNode = new ArrayList<>();
                         if (listWordQuery.size()==12){
@@ -1026,25 +1037,126 @@ public class Controller implements ActionListener{
                             m.getTxtPresent().setText("no result");
                         }
                         // output the result
-                        String hasil = "";
-                        for(Node n : resultNode){
-                            hasil+="ID Node : "+n.getId()+"\n";
-                            
-                            for (Iterator<String> it = n.getAttributeKeyIterator(); it.hasNext();) {
-                                String s = it.next();
-                                hasil += s + " = " + n.getAttribute(s) + "\n";
+                        if (listToken.get(2)!=listToken.get(4) && listToken.get(2)!=listToken.get(10)){
+                            JOptionPane.showMessageDialog(m, "Cek kembali inputan anda !", "Error Variable", 
+                                JOptionPane.ERROR_MESSAGE);
+                        }
+                        else{
+                            String hasil = "";
+                            for(Node n : resultNode){
+                                hasil+="ID Node : "+n.getId()+"\n";
+
+                                for (Iterator<String> it = n.getAttributeKeyIterator(); it.hasNext();) {
+                                    String s = it.next();
+                                    hasil += s + " = " + n.getAttribute(s) + "\n";
+                                }
+                                hasil+="\n";
+                                m.getTxtPresent().setText(hasil);
                             }
-                            m.getTxtPresent().setText(hasil);
                         }
                     }
                     else if(listToken.get(3)==5){
-                        JOptionPane.showMessageDialog(m, "Pola fo", "Pola", 
-                            JOptionPane.INFORMATION_MESSAGE);
+//                        JOptionPane.showMessageDialog(m, "Pola fo", "Pola", 
+//                            JOptionPane.INFORMATION_MESSAGE);
+                        //variable penampung list node hasil query
+                        ArrayList<Node> resultNode = new ArrayList<>();
+                        ArrayList<Node> tempNode = new ArrayList<>();
+                        if (listWordQuery.size()==15){
+                            System.err.println("masuk");
+                            String[] value;
+                            for(Node n : m.getG().getEachNode()){
+                                if(n.hasAttribute(listWordQuery.get(9))){
+                                    System.err.println("ininin" + listWordQuery.get(9));
+                                    String pembanding = "\"" + n.getAttribute(listWordQuery.get(9)) + "\"";
+                                    System.out.println(pembanding + " ?= "+ listWordQuery.get(11).toString());
+                                    if(pembanding.equals(listWordQuery.get(11).toString())){
+                                        tempNode.add(n); //pointer pertama
+                                    }
+                                }
+                            } // end for
+                            for (Iterator<Node> it  = tempNode.get(0).getNeighborNodeIterator(); it.hasNext();) {
+                                Node node = it.next();
+                                resultNode.add(node);
+                                System.out.println(node);
+                            }
+                            
+                            // output the result
+                            if (listToken.get(2)!=listToken.get(13) && listToken.get(5)!=listToken.get(7)){
+                                JOptionPane.showMessageDialog(m, "Cek kembali inputan anda !", "Error Variable", 
+                                    JOptionPane.ERROR_MESSAGE);
+                            }
+                            else{
+                                String hasil = "";
+                                for(Node n : resultNode){
+                                    hasil+="ID Node : "+n.getId()+"\n";
+
+                                    for (Iterator<String> it = n.getAttributeKeyIterator(); it.hasNext();) {
+                                        String s = it.next();
+                                        hasil += s + " = " + n.getAttribute(s) + "\n";
+                                    }
+                                    hasil+="\n";
+                                    m.getTxtPresent().setText(hasil);
+                                }
+                            }
+                        }
+                        else{
+                            System.out.println(listWordQuery.get(14));
+                        }
                     }
                     else if(listToken.get(3)==6){
                         JOptionPane.showMessageDialog(m, "Pola fof", "Pola", 
                             JOptionPane.INFORMATION_MESSAGE);
-                    }
+                        ArrayList<Node> resultNode = new ArrayList<>();
+                        ArrayList<Node> temp1Node = new ArrayList<>();
+                        ArrayList<Node> temp2Node = new ArrayList<>();
+                        if (listWordQuery.size()==15){
+                            System.err.println("masuk");
+                            String[] value;
+                            for(Node n : m.getG().getEachNode()){
+                                if(n.hasAttribute(listWordQuery.get(9))){
+                                    System.err.println("ininin" + listWordQuery.get(9));
+                                    String pembanding = "\"" + n.getAttribute(listWordQuery.get(9)) + "\"";
+                                    System.out.println(pembanding + " ?= "+ listWordQuery.get(11).toString());
+                                    if(pembanding.equals(listWordQuery.get(11).toString())){
+                                        temp1Node.add(n); //pointer pertama
+                                    }
+                                }
+                            } // end for
+                            for (Iterator<Node> it  = temp1Node.get(0).getNeighborNodeIterator(); it.hasNext();) {
+                                Node node = it.next();
+                                temp2Node.add(node); // temannya pointer pertama
+                                System.err.println(node+"aaa");
+                            }
+                            for(Node n : temp2Node){
+                                for (Iterator<Node> it  = n.getNeighborNodeIterator(); it.hasNext();) {
+                                    Node node = it.next();
+                                    if(node!=temp1Node.get(0)){
+                                        resultNode.add(node); // temannya teman pointer pertama
+                                    }
+                                    System.out.println(node);
+                                }
+                            }
+                            
+                            // output the result
+                            if (listToken.get(2)!=listToken.get(13) && listToken.get(5)!=listToken.get(7)){
+                                JOptionPane.showMessageDialog(m, "Cek kembali inputan anda !", "Error Variable", 
+                                    JOptionPane.ERROR_MESSAGE);
+                            }
+                            else{
+                                String hasil = "";
+                                for(Node n : resultNode){
+                                    hasil+="ID Node : "+n.getId()+"\n";
+
+                                    for (Iterator<String> it = n.getAttributeKeyIterator(); it.hasNext();) {
+                                        String s = it.next();
+                                        hasil += s + " = " + n.getAttribute(s) + "\n";
+                                    }
+                                    hasil+="\n";
+                                    m.getTxtPresent().setText(hasil);
+                                }
+                            }
+                        }
+                    } // end of if listtoken 6
                 }
                 else{
                     JOptionPane.showMessageDialog(m, "TOKEN SQL query NOT VALID", "Validation", 
